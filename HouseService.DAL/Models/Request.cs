@@ -16,11 +16,8 @@ namespace HouseService.DAL.Models
         public int AdvertisementID { get; set; }
         public int StateID { get; set; }
 
-        [ForeignKey("UserID")]
         public virtual User User { get; set; }
-        [ForeignKey("AdvertismentID")]
         public virtual Advertisement Advertisement { get; set; }
-        [ForeignKey("StateID")]
         public virtual State State { get; set; }
     }
 }

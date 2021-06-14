@@ -27,9 +27,7 @@ namespace HouseService.DAL.Models
         public DateTime EndDate { get; set; }
         public int Price { get; set; }
         public string Address { get; set; }
-        [ForeignKey("UserID")]
         public virtual User User { get; set; }
-        [ForeignKey("StatusID")]
         public virtual Status Status { get; set; }
 
         public virtual HashSet<Request> Requests { get; set; }

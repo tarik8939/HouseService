@@ -47,7 +47,8 @@ namespace HouseService.API
                     }
                 });
             });
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddScoped<AdvertisementLogic>();
             services.AddScoped<RequestLogic>();
             services.AddScoped<UserLogic>();

@@ -29,7 +29,6 @@ namespace HouseService.DAL.Models
         public int UserTypeID { get; set; }
         public virtual ICollection<Advertisement> Advertisements { get; set; }
         public virtual ICollection<Request> Requests { get; set; }
-        [ForeignKey("UserTypeID")]
         public virtual UserType UserType { get; set; }
 
     }

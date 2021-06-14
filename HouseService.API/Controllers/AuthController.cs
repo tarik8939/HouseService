@@ -48,14 +48,14 @@ namespace HouseService.API.Controllers
             return Ok(new { message = "success" });
         }
         [HttpGet("user")]
-        public IActionResult UserCheck()
+        public async Task<IActionResult> UserCheck()
         {
             try
             {
                 var jwt = Request.Cookies["jwt"];
                 var token = _jwtService.Verify(jwt);
                 int userId = int.Parse(token.Issuer);
-                var user = _logic.GetById(userId);
+                var user = await _logic.GetById(userId);
                 return Ok(user);
             }
             catch(Exception)
