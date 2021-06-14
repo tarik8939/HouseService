@@ -5,11 +5,12 @@ export class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      FirstName: "",
-      LastName: "",
-      Email: "",
-      PhoneNum: "",
-      Password: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNum: "",
+      password: "",
+      userTypeID: "",
       redirect: false
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -22,16 +23,23 @@ export class Register extends Component {
   }
   async Submit(event) {
     event.preventDefault();
-    await fetch('https://localhost:44307/api/register', {
-      method: 'POST',
+    console.log(JSON.stringify(this.state))
+    const path = "https://localhost:44307/api/Auth/register";
+    axios.post(path, JSON.stringify(this.state), {
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(this.state),
-    });
+    }).then((response) => {
+      console.log(response);
+    })
+      .catch((error) => {
+        console.log(error);
+      });
 
     this.setState({ redirect: true });
     this.render();
+
   }
 
 
@@ -49,31 +57,41 @@ export class Register extends Component {
                 <div className="form-group">
                   <label className="col-md-8">First name
                     <input type="text" className="form-control" placeholder="First name"
-                      onChange={this.handleInputChange} name="FirstName" value={this.state.FirstName} required />
+                      onChange={this.handleInputChange} name="firstName" value={this.state.FirstName} required />
                   </label>
                 </div>
                 <div className="form-group">
                   <label className="col-md-8">Last name
                     <input type="text" className="form-control" placeholder="Last name"
-                      onChange={this.handleInputChange} name="LastName" value={this.state.LastName} required />
+                      onChange={this.handleInputChange} name="lastName" value={this.state.LastName} required />
                   </label>
                 </div>
                 <div className="form-group">
                   <label className="col-md-8">Email address
-                    <input type="email" className="form-control" placeholder="Email address" name="Email"
+                    <input type="email" className="form-control" placeholder="Email address" name="email"
                       onChange={this.handleInputChange} value={this.state.Email} required />
                   </label>
                 </div>
                 <div className="form-group">
                   <label className="col-md-8">Phone number
-                    <input type="text" className="form-control" placeholder="Phone number" name="PhoneNum"
+                    <input type="text" className="form-control" placeholder="Phone number" name="phoneNum"
                       onChange={this.handleInputChange} value={this.state.PhoneNum} required />
                   </label>
                 </div>
                 <div className="form-group">
                   <label className="col-md-8">Password
-                    <input type="password" name="Password" className="form-control" placeholder="Password"
+                    <input type="password" name="password" className="form-control" placeholder="Password"
                       onChange={this.handleInputChange} value={this.state.Password} required />
+                  </label>
+                </div>
+                <div className="form-group">
+                  <label className="col-md-8"> Role
+                    <select name="userTypeID" className="form-control" placeholder="Choose a role"
+                      onChange={this.handleInputChange} value={this.state.userTypeID} required>
+                      <option value="0">Select role</option>
+                      <option value="1">House owner</option>
+                      <option value="2">Contractor</option>
+                    </select>
                   </label>
                 </div>
                 <div className="form-group">
