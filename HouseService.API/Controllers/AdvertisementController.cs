@@ -18,28 +18,28 @@ namespace HouseService.API.Controllers
             _logic = logic;
         }
 
-        [HttpGet("/GetAllAds")]
+        [HttpGet("getAll")]
         public async Task<ICollection<Advertisement>> GetAdvertisement()
         {
             var adlist = await _logic.GetAll();
             return adlist;
         }
 
-        [HttpGet("/GetAdByID/{id}")]
+        [HttpGet("getById/{id}")]
         public async Task<Advertisement> GetAdvertisementById(int id)
         {
             var adlist = await _logic.GetById(id);
             return adlist;
         }
 
-        [HttpGet("/GetAdsByUserID/{id}")]
+        [HttpGet("getByUserId/{id}")]
         public async Task<List<Advertisement>> GetAdvertisementByUserId(int id)
         {
             var adlist = await _logic.GetByUser(id);
             return adlist;
         }
 
-        [HttpPut("/EditAd/{id}")]
+        [HttpPut("edit/{id}")]
         public async Task<Advertisement> PutAdvertisement(int id, AdvertisementDto advertisement)
         {
             var ad = await _logic.Edit(id, advertisement);
@@ -47,21 +47,21 @@ namespace HouseService.API.Controllers
         }
 
         // [Authorize]
-        [HttpPost("/CreateAd")]
+        [HttpPost("create")]
         public async Task<Advertisement> PostAdvertisement(AdvertisementDto advertisement)
         {
             var ad = await _logic.Create(advertisement);
             return ad;
         }
 
-        [HttpDelete("/DeleteAd/{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteAdvertisement(int id)
         {
             await _logic.Delete(id);
             return NoContent();
         }
 
-        [HttpPut("/ChangeAdStatus/{id}")]
+        [HttpPut("chacngeStatus/{id}")]
         public async Task<Advertisement> ChangeStatus(int id, AdvertisementDto advertisement)
         {
             var ad = await _logic.ChangeStatus(id, advertisement);

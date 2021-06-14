@@ -18,42 +18,42 @@ namespace HouseService.API.Controllers
             _logic = logic;
         }
 
-        [HttpGet("/GetReqByID/{id}")]
+        [HttpGet("getById/{id}")]
         public async Task<Request> GetRequest(int id)
         {
             var req = await _logic.GetById(id);
             return req;
         }
 
-        [HttpGet("/GetReqByUserID/{id}")]
+        [HttpGet("getByUserId/{id}")]
         public async Task<List<Request>> GetRequestByUserId(int id)
         {
             var reqList = await _logic.GetByUser(id);
             return reqList;
         }
         
-        [HttpGet("/GetReqByAdID/{id}")]
+        [HttpGet("getByAdId/{id}")]
         public async Task<List<Request>> GetRequestByAdId(int id)
         {
             var reqList = await _logic.GetByAdvertisement(id);
             return reqList;
         }
         
-        [HttpPost("/CreateReq")]
+        [HttpPost("create")]
         public async Task<Request> PostRequest(RequestDto request)
         {
             var req = await _logic.Create(request);
             return req;
         }
         
-        [HttpDelete("/DeleteReq/{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteAdvertisement(int id)
         {
             await _logic.Delete(id);
             return NoContent();
         }
         
-        [HttpPut("/ChangeReqState/{id}")]
+        [HttpPut("changeState/{id}")]
         public async Task<Request> ChangeStatus(int id, RequestDto request)
         {
             var req = await _logic.ChangeState(id, request);
