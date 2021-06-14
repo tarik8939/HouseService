@@ -1,10 +1,9 @@
 ﻿using HouseService.BLL.Logics;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using HouseService.BLL.DTOs;
+using HouseService.DAL.Models;
 
 namespace HouseService.API.Controllers
 {
@@ -12,104 +11,61 @@ namespace HouseService.API.Controllers
     [ApiController]
     public class AdvertisementController : ControllerBase
     {
-        [Route("api/[controller]")]
-        [ApiController]
-        public class AuthController : ControllerBase
+        private AdvertisementLogic _logic;
+
+        public AdvertisementController(AdvertisementLogic logic)
         {
-            private AdvertisementLogic _logic;
-            public AuthController(AdvertisementLogic logic)
-            {
-                _logic = logic;
-            }
-            [HttpGet("all")]
-            public async Task<ActionResult> GetAdvertisement()
-            {
-                var adlist = await _logic.GetAll();
-            }
+            _logic = logic;
+        }
 
-            // GET: api/Advertisements/5
-            [HttpGet("{id}")]
-            public async Task<ActionResult> GetAdvertisement(int id)
-            {
-                //var advertisement = await _context.Advertisement.FindAsync(id);
-                var advertisement = await _context.Advertisement
-                    .Include(x => x.User)
-                    .Include(x => x.Requests)
-                    .Include(x => x.Status)
-                    .FirstOrDefaultAsync(x => x.AdvertisementID == id);
+        [HttpGet("/GetAllAds")]
+        public async Task<ICollection<Advertisement>> GetAdvertisement()
+        {
+            var adlist = await _logic.GetAll();
+            return adlist;
+        }
 
-                if (advertisement == null)
-                {
-                    return NotFound();
-                }
+        [HttpGet("/GetAdByID/{id}")]
+        public async Task<Advertisement> GetAdvertisementById(int id)
+        {
+            var adlist = await _logic.GetById(id);
+            return adlist;
+        }
 
-                return advertisement;
-            }
+        [HttpGet("/GetAdsByUserID/{id}")]
+        public async Task<List<Advertisement>> GetAdvertisementByUserId(int id)
+        {
+            var adlist = await _logic.GetByUser(id);
+            return adlist;
+        }
 
-            // PUT: api/Advertisements/5
-            // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-            [HttpPut("{id}")]
-            public async Task<IActionResult> PutAdvertisement(int id, Advertisement advertisement)
-            {
-                if (id != advertisement.AdvertisementID)
-                {
-                    return BadRequest();
-                }
+        [HttpPut("/EditAd/{id}")]
+        public async Task<Advertisement> PutAdvertisement(int id, AdvertisementDto advertisement)
+        {
+            var ad = await _logic.Edit(id, advertisement);
+            return ad;
+        }
 
-                _context.Entry(advertisement).State = EntityState.Modified;
+        // [Authorize]
+        [HttpPost("/CreateAd")]
+        public async Task<Advertisement> PostAdvertisement(AdvertisementDto advertisement)
+        {
+            var ad = await _logic.Create(advertisement);
+            return ad;
+        }
 
-                try
-                {
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AdvertisementExists(id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+        [HttpDelete("/DeleteAd/{id}")]
+        public async Task<IActionResult> DeleteAdvertisement(int id)
+        {
+            await _logic.Delete(id);
+            return NoContent();
+        }
 
-                return NoContent();
-            }
-
-            // POST: api/Advertisements
-            // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-            // [Authorize]
-            [HttpPost]
-            public async Task<ActionResult<Advertisement>> PostAdvertisement(Advertisement advertisement)
-            {
-                advertisement.StatusID = (_context.Status.FirstOrDefault(x => x.StatusName == "Published")).StatusID;
-                _context.Advertisement.Add(advertisement);
-                await _context.SaveChangesAsync();
-
-                return CreatedAtAction("GetAdvertisement", new { id = advertisement.AdvertisementID }, advertisement);
-            }
-
-            // DELETE: api/Advertisements/5
-            [HttpDelete("{id}")]
-            public async Task<IActionResult> DeleteAdvertisement(int id)
-            {
-                var advertisement = await _context.Advertisement.FindAsync(id);
-                if (advertisement == null)
-                {
-                    return NotFound();
-                }
-
-                _context.Advertisement.Remove(advertisement);
-                await _context.SaveChangesAsync();
-
-                return NoContent();
-            }
-
-            private bool AdvertisementExists(int id)
-            {
-                return _context.Advertisement.Any(e => e.AdvertisementID == id);
-            }
+        [HttpPut("/ChangeAdStatus/{id}")]
+        public async Task<Advertisement> ChangeStatus(int id, AdvertisementDto advertisement)
+        {
+            var ad = await _logic.ChangeStatus(id, advertisement);
+            return ad;
         }
     }
 }
