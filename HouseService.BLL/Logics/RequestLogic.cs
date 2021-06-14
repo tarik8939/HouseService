@@ -34,9 +34,9 @@ namespace HouseService.BLL.Logics
             }
         }
 
-        public async Task<Request> ChangeState(int stateId, RequestDto dto)
+        public async Task<Request> ChangeState(int stateId, int id)
         {
-            var request = await this.requests.GetById(dto.RequestID);
+            var request = await this.requests.GetById(id);
             if (request != null)
             {
                 request.StateID = stateId;

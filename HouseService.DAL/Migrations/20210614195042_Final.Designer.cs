@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HouseService.DAL.Migrations
 {
     [DbContext(typeof(HouseDbContext))]
-    [Migration("20210614173417_ModelsUpdate")]
-    partial class ModelsUpdate
+    [Migration("20210614195042_Final")]
+    partial class Final
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

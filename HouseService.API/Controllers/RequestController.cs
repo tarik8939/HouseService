@@ -53,10 +53,10 @@ namespace HouseService.API.Controllers
             return NoContent();
         }
         
-        [HttpPut("changeState/{id}")]
-        public async Task<Request> ChangeStatus(int id, RequestDto request)
+        [HttpPut("changeState/{id}/{stateId}")]
+        public async Task<Request> ChangeStatus(int id, int stateId)
         {
-            var req = await _logic.ChangeState(id, request);
+            var req = await _logic.ChangeState(stateId, id);
             return req;
         }
     }

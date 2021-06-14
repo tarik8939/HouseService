@@ -20,7 +20,7 @@ namespace HouseService.DAL.Functions
         public async Task<Request> Create(Request request)
         {
             _context.Requests.Add(request);
-            request.AdvertisementID = await _context.SaveChangesAsync();
+            request.RequestID = await _context.SaveChangesAsync();
             return request;
         }
 
@@ -49,7 +49,6 @@ namespace HouseService.DAL.Functions
         {
             var request = await _context.Requests
                .Include(x => x.User)
-               .Include(x => x.Advertisement)
                .Include(x => x.State)
                .Where(x => x.AdvertisementID == advertisementId)
                .ToListAsync();
@@ -66,6 +65,8 @@ namespace HouseService.DAL.Functions
         {
             var request = await _context.Requests
                 .Include(x => x.User)
+                .Include(x => x.Advertisement)
+                .Include(x => x.State)
                 .FirstOrDefaultAsync(x => x.AdvertisementID == id);
 
             if (request == null)
@@ -80,8 +81,8 @@ namespace HouseService.DAL.Functions
         {
             var request = await _context.Requests
                .Include(x => x.User)
-               .Include(x=>x.Advertisement)
                .Include(x=>x.State)
+               .Include(x => x.Advertisement)
                .Where(x => x.UserID == userId)
                .ToListAsync();
 

@@ -9,7 +9,6 @@ namespace HouseService.BLL.DTOs
 {
     public class AdvertisementDto
     {
-        public int AdvertisementId { get; set; }
         public int UserID { get; set; }
         public int StatusID { get; set; }
         public string Name { get; set; }

@@ -61,10 +61,10 @@ namespace HouseService.API.Controllers
             return NoContent();
         }
 
-        [HttpPut("chacngeStatus/{id}")]
-        public async Task<Advertisement> ChangeStatus(int id, AdvertisementDto advertisement)
+        [HttpPut("changeStatus/{id}/{statusId}")]
+        public async Task<Advertisement> ChangeStatus(int statusId, int id)
         {
-            var ad = await _logic.ChangeStatus(id, advertisement);
+            var ad = await _logic.ChangeStatus(statusId, id);
             return ad;
         }
     }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HouseService.DAL.Migrations
 {
     [DbContext(typeof(HouseDbContext))]
-    [Migration("20210614123304_AddedFullNLayer")]
-    partial class AddedFullNLayer
+    [Migration("20210614195815_Unique_Email")]
+    partial class Unique_Email
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,16 +29,22 @@ namespace HouseService.DAL.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(75)
+                        .HasColumnType("nvarchar(75)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(75)
+                        .HasColumnType("nvarchar(75)");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
@@ -71,9 +77,6 @@ namespace HouseService.DAL.Migrations
                     b.Property<int>("AdvertisementID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("AdvertismentID")
-                        .HasColumnType("int");
-
                     b.Property<int>("StateID")
                         .HasColumnType("int");
 
@@ -82,7 +85,7 @@ namespace HouseService.DAL.Migrations
 
                     b.HasKey("RequestID");
 
-                    b.HasIndex("AdvertismentID");
+                    b.HasIndex("AdvertisementID");
 
                     b.HasIndex("StateID");
 
@@ -98,7 +101,8 @@ namespace HouseService.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("StatusName")
+                    b.Property<string>("StateName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StateID");
@@ -114,6 +118,7 @@ namespace HouseService.DAL.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("StatusName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StatusID");
@@ -129,24 +134,35 @@ namespace HouseService.DAL.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNum")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
 
                     b.Property<int>("UserTypeID")
                         .HasColumnType("int");
 
                     b.HasKey("UserID");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.HasIndex("UserTypeID");
 
@@ -161,6 +177,7 @@ namespace HouseService.DAL.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("UserTypeName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserTypeID");
@@ -191,7 +208,9 @@ namespace HouseService.DAL.Migrations
                 {
                     b.HasOne("HouseService.DAL.Models.Advertisement", "Advertisement")
                         .WithMany("Requests")
-                        .HasForeignKey("AdvertismentID");
+                        .HasForeignKey("AdvertisementID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("HouseService.DAL.Models.State", "State")
                         .WithMany("Requests")

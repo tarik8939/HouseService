@@ -52,25 +52,22 @@ namespace HouseService.BLL.Logics
             var ad = await this.ads.GetById(id);
             if (ad != null)
             {
-                var res = new Advertisement
-                {
-                    UserID = dto.UserID,
-                    Name = dto.Name,
-                    Description = dto.Description,
-                    Address = dto.Address,
-                    Price = dto.Price,
-                    StartDate = dto.StartDate,
-                    EndDate = dto.EndDate,
-                };
-                var resad = await this.ads.Edit(res);
+                ad.Name = dto.Name;
+                ad.Description = dto.Description;
+                ad.Address = dto.Address;
+                ad.Price = dto.Price;
+                ad.StartDate = dto.StartDate;
+                ad.EndDate = dto.EndDate;
+                ad.StatusID = dto.StatusID;
+                var resad = await this.ads.Edit(ad);
                 return resad;
             }
             return null;
         }
 
-        public async Task<Advertisement> ChangeStatus(int statusId, AdvertisementDto dto)
+        public async Task<Advertisement> ChangeStatus(int statusId, int id)
         {
-            var ad = await this.ads.GetById(dto.AdvertisementId);
+            var ad = await this.ads.GetById(id);
             if (ad != null)
             {
                 ad.StatusID = statusId;

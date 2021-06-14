@@ -30,6 +30,13 @@ namespace HouseService.DAL.Data
 
         public HouseDbContext(DbContextOptions<HouseDbContext> options) : base(options) { }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<User>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+        }
+
         public DbSet<User> Users { get; set; }
 
         public DbSet<Advertisement> Advertisements { get; set; }

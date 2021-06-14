@@ -159,6 +159,9 @@ namespace HouseService.DAL.Migrations
 
                     b.HasKey("UserID");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.HasIndex("UserTypeID");
 
                     b.ToTable("Users");

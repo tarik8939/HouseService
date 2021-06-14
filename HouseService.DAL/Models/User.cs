@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace HouseService.DAL.Models
 {
@@ -32,7 +33,7 @@ namespace HouseService.DAL.Models
         public string LastName { get; set; }
         [NotMapped]
         public string FullName => $"{FirstName} {LastName}";
-        [JsonIgnore]
+        [Newtonsoft.Json.JsonIgnore]
         public string Password { get; set; }
         public int UserTypeID { get; set; }
         public virtual ICollection<Advertisement> Advertisements { get; set; }
