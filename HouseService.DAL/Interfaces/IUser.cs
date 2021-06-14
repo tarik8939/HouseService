@@ -9,9 +9,8 @@ namespace HouseService.DAL.Interfaces
 {
     public interface IUser
     {
-        User Create(User user);
-        User GetByEmail(string email);
-
-        User GetById(int id);
+        Task<User> Create(User user);
+        Task<User> GetByEmail(string email);
+        Task<User> GetById(int id);
     }
 }

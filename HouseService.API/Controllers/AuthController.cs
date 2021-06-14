@@ -1,7 +1,6 @@
-﻿using HouseService.API.Helpers;
-using HouseService.BLL.DTOs;
-using HouseService.DAL.Data;
-using HouseService.DAL.Models;
+﻿using HouseService.BLL.DTOs;
+using HouseService.BLL.Helpers;
+using HouseService.BLL.Logics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,33 +10,27 @@ using System.Threading.Tasks;
 
 namespace HouseService.API.Controllers
 {
-    [Route("api")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IUserRepository _repository;
-        private readonly JWTService _jwtService;
-        public AuthController(IUserRepository repository, JWTService jwtService)
+        private UserLogic _logic;
+        private JWTService _jwtService;
+        public AuthController(UserLogic logic, JWTService jwtService)
         {
-            _repository = repository;
+            _logic = logic;
             _jwtService = jwtService;
         }
         [HttpPost("register")]
-        public IActionResult Register(RegisterDto dto)
+        public async Task<IActionResult> Register(RegisterDto dto)
         {
-            var user = new User
-            {
-                FirstName = dto.FirstName,
-                LastName = dto.LastName,
-                Email = dto.Email,
-                Password = BCrypt.Net.BCrypt.HashPassword(dto.Password)
-            };
-            return Created("succes", _repository.Create(user));
+            var user = await _logic.Register(dto);
+            return Created("success", user);
         }
         [HttpPost("login")]
-        public IActionResult Login(LoginDto dto)
+        public async Task<IActionResult> Login(LoginDto dto)
         {
-            var user = _repository.GetByEmail(dto.Email);
+            var user = await _logic.GetByEmail(dto.Email);
             if (user == null)
             {
                 return BadRequest(new { message = "Invalid Credentials" });
@@ -62,7 +55,7 @@ namespace HouseService.API.Controllers
                 var jwt = Request.Cookies["jwt"];
                 var token = _jwtService.Verify(jwt);
                 int userId = int.Parse(token.Issuer);
-                var user = _repository.GetById(userId);
+                var user = _logic.GetById(userId);
                 return Ok(user);
             }
             catch(Exception)
