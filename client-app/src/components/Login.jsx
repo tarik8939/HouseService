@@ -28,12 +28,34 @@ export class Login extends Component {
       body: JSON.stringify(this.state),
     }).then((response) => {
       console.log(response);
-    })
-      .catch((error) => {
+      if (response.status === 200) {
+        // this.setState({ redirect: true });
+        // this.render();
+        this.asd()
+      }
+
+    }).catch((error) => {
         console.log(error);
       });
-    this.setState({ redirect: true });
-    this.render();
+  }
+  asd(){
+    const path = "https://localhost:44307/api/Auth/user";
+    // axios.get(path).then((response) => {
+    //   // const user = response.data
+    //   // this.setState({ user: user })
+    //   console.log(response.data);
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
+
+    axios.get(path, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true,
+    }).then((response) => {
+      console.log(response);
+    });
   }
   render() {
     if (this.state.redirect)
