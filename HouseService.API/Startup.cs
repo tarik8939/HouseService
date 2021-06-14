@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HouseService.API.Helpers;
-using HouseService.BLL.Helpers;
 using HouseService.DAL.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -48,8 +47,8 @@ namespace HouseService.API
                 });
             });
             services.AddControllers();
-            services.AddDbContext<HouseDbContext>(options =>options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            /*services.AddDbContext<HouseDbContext>(options =>options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));*/
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<JWTService>();
         }

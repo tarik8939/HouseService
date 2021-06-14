@@ -47,7 +47,7 @@ namespace HouseService.API.Controllers
                 return BadRequest(new { message = "Invalid Credentials" });
             }
 
-            var jwt = _jwtService.Generate(user.Id);
+            var jwt = _jwtService.Generate(user.UserID);
 
             Response.Cookies.Append("jwt", jwt, new CookieOptions { HttpOnly = true,    SameSite = SameSiteMode.None,
                 Secure = true

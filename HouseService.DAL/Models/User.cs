@@ -17,18 +17,19 @@ namespace HouseService.DAL.Models
             Requests = new HashSet<Request>();
         }
         [Key]
-        public int Id { get; set; }
+        public int UserID { get; set; }
         public string Email { get; set; }
         public string PhoneNum { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         [NotMapped]
         public string FullName => $"{FirstName} {LastName}";
-        public int UserTypeID { get; set; }
         [JsonIgnore]
         public string Password { get; set; }
+        public int UserTypeID { get; set; }
         public virtual ICollection<Advertisement> Advertisements { get; set; }
         public virtual ICollection<Request> Requests { get; set; }
+        [ForeignKey("UserTypeID")]
         public virtual UserType UserType { get; set; }
 
     }

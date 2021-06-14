@@ -17,7 +17,7 @@ namespace HouseService.DAL.Data
         public User Create(User user)
         {
             _context.Users.Add(user);
-            user.Id = _context.SaveChanges();
+            user.UserID = _context.SaveChanges();
             return user;
         }
 
@@ -28,7 +28,7 @@ namespace HouseService.DAL.Data
 
         public User GetById(int id)
         {
-            return _context.Users.FirstOrDefault(u => u.Id == id);
+            return _context.Users.FirstOrDefault(u => u.UserID == id);
         }
     }
 }
