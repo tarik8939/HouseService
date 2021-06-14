@@ -20,16 +20,42 @@ export class Login extends Component {
   }
   async Submit(event) {
     event.preventDefault();
-    await fetch('https://localhost:44307/api/login', {
-      method: 'POST',
+    const path = "https://localhost:44307/api/Auth/login";
+    axios.post(path, JSON.stringify(this.state), {
       headers: {
         'Content-Type': 'application/json'
       },
-      credentials: 'include',
       body: JSON.stringify(this.state),
+    }).then((response) => {
+      console.log(response);
+      if (response.status === 200) {
+        // this.setState({ redirect: true });
+        // this.render();
+        this.asd()
+      }
+
+    }).catch((error) => {
+        console.log(error);
+      });
+  }
+  asd(){
+    const path = "https://localhost:44307/api/Auth/user";
+    // axios.get(path).then((response) => {
+    //   // const user = response.data
+    //   // this.setState({ user: user })
+    //   console.log(response.data);
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
+
+    axios.get(path, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true,
+    }).then((response) => {
+      console.log(response);
     });
-    this.setState({ redirect: true });
-    this.render();
   }
   render() {
     if (this.state.redirect)
