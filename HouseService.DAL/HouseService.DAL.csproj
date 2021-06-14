@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-﻿<Project Sdk="Microsoft.NET.Sdk">
-=======
 <Project Sdk="Microsoft.NET.Sdk">
->>>>>>> Stashed changes
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -20,20 +16,9 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-<<<<<<< Updated upstream
+
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
   </ItemGroup>
 
-=======
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.Extensions.Configuration">
-      <HintPath>..\..\..\..\..\Program Files\dotnet\packs\Microsoft.AspNetCore.App.Ref\5.0.0\ref\net5.0\Microsoft.Extensions.Configuration.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
->>>>>>> Stashed changes
 </Project>
