@@ -42,7 +42,9 @@ namespace HouseService.API.Controllers
 
             var jwt = _jwtService.Generate(user.UserID);
 
-            Response.Cookies.Append("jwt", jwt, new CookieOptions { HttpOnly = true,    SameSite = SameSiteMode.None,
+            Response.Cookies.Append("jwt", jwt, new CookieOptions { 
+                HttpOnly = true, 
+                SameSite = SameSiteMode.None,
                 Secure = true
             });
             return Ok(new { message = "success" });

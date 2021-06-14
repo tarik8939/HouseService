@@ -21,12 +21,14 @@ export class Login extends Component {
   async Submit(event) {
     event.preventDefault();
     const path = "https://localhost:44307/api/Auth/login";
-    axios.post(path, JSON.stringify(this.state), {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(this.state),
-    }).then((response) => {
+    await fetch(path,  {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(this.state), 
+      }).then((response) => {
       console.log(response);
       if (response.status === 200) {
         // this.setState({ redirect: true });
@@ -39,7 +41,7 @@ export class Login extends Component {
       });
   }
   asd(){
-    const path = "https://localhost:44307/api/Auth/user";
+    const path = 'https://localhost:44307/api/Auth/user';
     // axios.get(path).then((response) => {
     //   // const user = response.data
     //   // this.setState({ user: user })
