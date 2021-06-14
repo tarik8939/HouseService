@@ -23,7 +23,8 @@ namespace HouseService.BLL.Logics
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Email = dto.Email,
-                Password = BCrypt.Net.BCrypt.HashPassword(dto.Password)
+                Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+                UserTypeID = dto.UserTypeID
             };
             var result = await this.users.Create(user);
             if (result.UserID > 0)

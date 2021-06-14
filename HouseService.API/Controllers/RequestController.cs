@@ -1,10 +1,9 @@
 ﻿using HouseService.BLL.Logics;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using HouseService.BLL.DTOs;
+using HouseService.DAL.Models;
 
 namespace HouseService.API.Controllers
 {
@@ -12,71 +11,53 @@ namespace HouseService.API.Controllers
     [ApiController]
     public class RequestController : ControllerBase
     {
-        [Route("api/[controller]")]
-        [ApiController]
-        public class AuthController : ControllerBase
+        private RequestLogic _logic;
+
+        public RequestController(RequestLogic logic)
         {
-            private RequestLogic _logic;
-            public AuthController(RequestLogic logic)
-            {
-                _logic = logic;
-            }
-            [HttpPost("register")]
-            public async Task<IActionResult> Register(RegisterDto dto)
-            {
-                var user = await _logic.Register(dto);
-                return Created("success", user);
-            }
-            [HttpPost("login")]
-            public async Task<IActionResult> Login(LoginDto dto)
-            {
-                var user = await _logic.GetByEmail(dto.Email);
-                if (user == null)
-                {
-                    return BadRequest(new { message = "Invalid Credentials" });
-                }
-                if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
-                {
-                    return BadRequest(new { message = "Invalid Credentials" });
-                }
+            _logic = logic;
+        }
 
-                var jwt = _jwtService.Generate(user.UserID);
+        [HttpGet("/GetReqByID/{id}")]
+        public async Task<Request> GetRequest(int id)
+        {
+            var req = await _logic.GetById(id);
+            return req;
+        }
 
-                Response.Cookies.Append("jwt", jwt, new CookieOptions
-                {
-                    HttpOnly = true,
-                    SameSite = SameSiteMode.None,
-                    Secure = true
-                });
-                return Ok(new { message = "success" });
-            }
-            [HttpGet("user")]
-            public IActionResult UserCheck()
-            {
-                try
-                {
-                    var jwt = Request.Cookies["jwt"];
-                    var token = _jwtService.Verify(jwt);
-                    int userId = int.Parse(token.Issuer);
-                    var user = _logic.GetById(userId);
-                    return Ok(user);
-                }
-                catch (Exception)
-                {
-                    return Unauthorized();
-                }
-
-
-            }
-            [HttpPost("logout")]
-            public IActionResult Logout()
-            {
-                Response.Cookies.Delete("jwt");
-                return Ok(new
-                {
-                    message = "success"
-                });
-            }
+        [HttpGet("/GetReqByUserID/{id}")]
+        public async Task<List<Request>> GetRequestByUserId(int id)
+        {
+            var reqList = await _logic.GetByUser(id);
+            return reqList;
+        }
+        
+        [HttpGet("/GetReqByAdID/{id}")]
+        public async Task<List<Request>> GetRequestByAdId(int id)
+        {
+            var reqList = await _logic.GetByAdvertisement(id);
+            return reqList;
+        }
+        
+        [HttpPost("/CreateReq")]
+        public async Task<Request> PostRequest(RequestDto request)
+        {
+            var req = await _logic.Create(request);
+            return req;
+        }
+        
+        [HttpDelete("/DeleteReq/{id}")]
+        public async Task<IActionResult> DeleteAdvertisement(int id)
+        {
+            await _logic.Delete(id);
+            return NoContent();
+        }
+        
+        [HttpPut("/ChangeReqState/{id}")]
+        public async Task<Request> ChangeStatus(int id, RequestDto request)
+        {
+            var req = await _logic.ChangeState(id, request);
+            return req;
         }
     }
 }
