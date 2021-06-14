@@ -8,7 +8,8 @@ export class Login extends Component {
     this.state = {
       Email: "",
       Password: "",
-      redirect: false
+      redirect: false,
+      userName: " "
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.Submit = this.Submit.bind(this);
@@ -40,24 +41,21 @@ export class Login extends Component {
         console.log(error);
       });
   }
-  asd(){
+  async asd(){
     const path = 'https://localhost:44307/api/Auth/user';
-    // axios.get(path).then((response) => {
-    //   // const user = response.data
-    //   // this.setState({ user: user })
-    //   console.log(response.data);
-    // }).catch((error) => {
-    //   console.log(error);
-    // });
 
-    axios.get(path, {
+    await fetch(path,  {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       },
-      withCredentials: true,
+      credentials: 'include'
     }).then((response) => {
       console.log(response);
-    });
+
+    }).catch((error) => {
+        console.log(error);
+      });
   }
   render() {
     if (this.state.redirect)

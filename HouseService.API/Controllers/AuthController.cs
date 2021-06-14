@@ -1,6 +1,7 @@
 ﻿using HouseService.BLL.DTOs;
 using HouseService.BLL.Helpers;
 using HouseService.BLL.Logics;
+using HouseService.DAL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -42,11 +43,13 @@ namespace HouseService.API.Controllers
 
             var jwt = _jwtService.Generate(user.UserID);
 
-            Response.Cookies.Append("jwt", jwt, new CookieOptions { 
-                HttpOnly = true, 
+            Response.Cookies.Append("jwt", jwt, new CookieOptions
+            {
+                HttpOnly = true,
                 SameSite = SameSiteMode.None,
-                Secure = true
-            });
+                Secure = true,
+                MaxAge = new TimeSpan(1, 5, 3)
+            }) ;
             return Ok(new { message = "success" });
         }
         [HttpGet("user")]

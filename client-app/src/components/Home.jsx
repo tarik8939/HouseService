@@ -4,35 +4,35 @@ export class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // user: null
+      userName: "",
+      loading: true
     }
   }
   componentDidMount() {
-    // this.load();      // withCredentials: true,
-    const path = "https://localhost:44307/api/Auth/user";
-    axios.get(path).then((response) => {
-      // const user = response.data
-      // this.setState({ user: user })
-      console.log(response.data);
-    }).catch((error) => {
-      console.log(error);
-    });
+   this.load();
   }
-  // load() {
-  //   const path = "https://localhost:44307/api/Auth/user";
-  //   axios.get(path, {
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     withCredentials: true,
-  //   }).then((response) => {
-  //     const user = response.data
-  //     this.setState({ user: user })
-  //     console.log(this.state.user);
-  //   });
-  // }
+  async load(){
+    const path = 'https://localhost:44307/api/Auth/user';
+
+    await fetch(path,  {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    }).then(response => response.json())
+    .then(response => {
+    
+        this.setState({loading:false, userName:response.fullName});
+        this.render();
+    
+    })
+
+  }
   render() {
+    if(this.state.loading)
     return (<h1>Hello</h1>);
+    if(!this.state.loading)
+    return (<h1>Fuck you {this.state.userName}</h1>);
   }
 }
 
