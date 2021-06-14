@@ -18,9 +18,17 @@ namespace HouseService.DAL.Models
         }
         [Key]
         public int UserID { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string Email { get; set; }
+        [Required]
+        [MaxLength(14)]
         public string PhoneNum { get; set; }
+        [Required]
+        [MaxLength(25)]
         public string FirstName { get; set; }
+        [Required]
+        [MaxLength(25)]
         public string LastName { get; set; }
         [NotMapped]
         public string FullName => $"{FirstName} {LastName}";

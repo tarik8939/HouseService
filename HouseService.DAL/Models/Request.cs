@@ -12,8 +12,11 @@ namespace HouseService.DAL.Models
     {
         [Key]
         public int RequestID { get; set; }
+        [Required]
         public int? UserID { get; set; }
+        [Required]
         public int AdvertisementID { get; set; }
+        [Required]
         public int StateID { get; set; }
 
         public virtual User User { get; set; }

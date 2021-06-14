@@ -17,15 +17,25 @@ namespace HouseService.DAL.Models
 
         [Key]
         public int AdvertisementID { get; set; }
+        [Required]
         public int UserID { get; set; }
+        [Required]
         public int StatusID { get; set; }
+        [Required]
+        [MaxLength(75)]
         public string Name { get; set; }
+        [Required]
+        [MaxLength(500)]
         public string Description { get; set; }
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
+        [Required]
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
+        [Required]
         public int Price { get; set; }
+        [Required]
+        [MaxLength(75)]
         public string Address { get; set; }
         public virtual User User { get; set; }
         public virtual Status Status { get; set; }

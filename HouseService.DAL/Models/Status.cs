@@ -17,6 +17,7 @@ namespace HouseService.DAL.Models
 
         [Key]
         public int StatusID { get; set; }
+        [Required]
         public string StatusName { get; set; }
 
         public virtual ICollection<Advertisement> Advertisements { get; set; }

@@ -17,7 +17,7 @@ namespace HouseService.DAL.Models
 
         [Key]
         public int UserTypeID { get; set; }
-
+        [Required]
         public string UserTypeName { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
