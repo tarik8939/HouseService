@@ -14,6 +14,7 @@ export class Login extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.Submit = this.Submit.bind(this);
   }
+  
   handleInputChange(event) {
     const name = event.target.name;
     const value = event.target.value;
@@ -29,33 +30,14 @@ export class Login extends Component {
         },
         credentials: 'include',
         body: JSON.stringify(this.state), 
-      }).then((response) => {
-      console.log(response);
-      if (response.status === 200) {
-        // this.setState({ redirect: true });
-        // this.render();
-        this.asd()
-      }
-
-    }).catch((error) => {
+      }).then(response =>response.json()).then(response => {
+        console.log(response);
+        this.props.handleLogin(response);
+      }).catch((error) => {
         console.log(error);
       });
-  }
-  async asd(){
-    const path = 'https://localhost:44307/api/Auth/user';
-
-    await fetch(path,  {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include'
-    }).then((response) => {
-      console.log(response);
-
-    }).catch((error) => {
-        console.log(error);
-      });
+      this.setState({redirect:true});
+      this.render();
   }
   render() {
     if (this.state.redirect)

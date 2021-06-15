@@ -50,7 +50,7 @@ namespace HouseService.API.Controllers
                 Secure = true,
                 MaxAge = new TimeSpan(1, 5, 3)
             }) ;
-            return Ok(new { message = "success" });
+            return Ok(user);
         }
         [HttpGet("user")]
         public async Task<IActionResult> UserCheck()
@@ -73,7 +73,13 @@ namespace HouseService.API.Controllers
         [HttpPost("logout")]
         public IActionResult Logout()
         {
-            Response.Cookies.Delete("jwt");
+            Response.Cookies.Append("jwt", "logout", new CookieOptions
+            {
+                HttpOnly = true,
+                SameSite = SameSiteMode.None,
+                Secure = true,
+                MaxAge = new TimeSpan(1)
+            });
             return Ok(new
             {
                 message = "success"

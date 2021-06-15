@@ -65,7 +65,7 @@ export class ListOfAds extends Component {
         const RenderAds = () => {
             if (this.state.isLoading == true) {
                 return (
-                    <div className="col-md-6">
+                    <div className="col-md-8">
                         {this.state.Ads.filter(ad => ad.name.includes(this.state.title)).map((item, index) => (
                             <div key={index} className="border border-primary rounded m-1 ml-4">
                                 <div className="row">

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import {
@@ -23,7 +22,6 @@ export class NewAd extends Component {
             endDate: null,
             Price: "",
             isAuthenticated: false,
-            userName: "",
             userID: "",
             formErrors: { Name: '', Price: '' },
             NameValid: false,
@@ -39,6 +37,21 @@ export class NewAd extends Component {
         const value = e.target.value;
         this.setState({ [name]: value },
             () => { this.validateField(name, value) });
+    }
+    async componentDidMount() {
+      const path = 'https://localhost:44307/api/Auth/user';
+      await fetch(path,  {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      }).then(response => response.json())
+      .then(response => {
+      
+          this.setState({isAuthenticated:true, userID:response.userID});
+          this.render();
+      
+      })
     }
     PostAd() {
         const path = "https://localhost:44307/api/Auth/user";
@@ -69,7 +82,7 @@ export class NewAd extends Component {
         //     this.PostAd();
         // });
         // console.log(JSON.stringify(this.state));
-        const path = "https://localhost:44307/api/Auth/user";
+        const path = "https://localhost:44307/api/Advertisement/create";
         axios
             .post(path, JSON.stringify(this.state), {
                 headers: {
@@ -83,6 +96,7 @@ export class NewAd extends Component {
                 console.log(error);
             });
     }
+
     validateField(fieldName, value) {
         let fieldValidationErrors = this.state.formErrors;
         let NameValid = this.state.NameValid;

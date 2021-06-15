@@ -25,27 +25,27 @@ export class Register extends Component {
     event.preventDefault();
     console.log(JSON.stringify(this.state))
     const path = "https://localhost:44307/api/Auth/register";
-    axios.post(path, JSON.stringify(this.state), {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(this.state),
-    }).then((response) => {
-      console.log(response);
-    })
-      .catch((error) => {
+    await fetch(path,  {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(this.state), 
+      }).then(response =>response.json()).then(response => {
+        console.log(response);
+        this.props.handleLogin(response);
+      }).catch((error) => {
         console.log(error);
       });
-
-    this.setState({ redirect: true });
-    this.render();
-
+      this.setState({redirect:true});
+      this.render();
   }
 
 
   render() {
     if (this.state.redirect)
-      return (<Redirect to="/login" />);
+      return (<Redirect to="/" />);
     else
       return (
         <div className="row">

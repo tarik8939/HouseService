@@ -32,7 +32,7 @@ export class Home extends Component {
     if(this.state.loading)
     return (<h1>Hello</h1>);
     if(!this.state.loading)
-    return (<h1>Fuck you {this.state.userName}</h1>);
+    return (<h1>Fuck you {this.props.user.fullName}</h1>);
   }
 }
 
