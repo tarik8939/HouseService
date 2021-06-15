@@ -48,8 +48,15 @@ export class NewAd extends Component {
     Submit(event) {
         event.preventDefault();
         const path = "https://localhost:44307/api/Advertisement/create";
-        axios
-            .post(path, JSON.stringify(this.state), {
+        axios.post(path, {
+              name: this.state.Name,
+              description: this.state.Description,
+              address: this.state.Address,
+              startDate: this.state.startDate,
+              endDate: this.state.endDate,
+              price: this.state.Price,
+              userID: this.state.userID,
+          }, {
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -101,13 +108,11 @@ export class NewAd extends Component {
       if(this.state.isAuthenticated){
         return (
           <div className="row">
-          <div className="col-md-3"></div>
-          <div className="col-md-6">
+          <div className="col-md-4"></div>
+          <div className="col-md-6 justify-content-center">
                     <form onSubmit={this.Submit}>
                         <h2>Make a new ad</h2>
-                        <div className="panel panel-default">
-                            <FormErrors formErrors={this.state.formErrors} />
-                        </div>
+                        
                         <div className={`form-group ${this.errorClass(this.state.formErrors.Name)}`}>
                             <label className="col-md-8">
                                 Name:
@@ -173,7 +178,7 @@ export class NewAd extends Component {
                                 />
                             </label>
                         </div>
-                        <input type="submit" value="Send" className="btn col-md-12 btn-primary text-center"  disabled={!this.state.formValid} />
+                        <input type="submit" value="Send" className="btn col-md-8 btn-primary text-center"  disabled={!this.state.formValid} />
                     </form>
                 </div>
             </div>
