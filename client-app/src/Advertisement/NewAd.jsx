@@ -8,6 +8,7 @@ import {
     DayPickerRangeController,
 } from "react-dates";
 import { FormErrors } from './FormErrors';
+import { Redirect } from 'react-router-dom';
 
 
 export class NewAd extends Component {
@@ -26,11 +27,12 @@ export class NewAd extends Component {
             formErrors: { Name: '', Price: '' },
             NameValid: false,
             PriceValid: false,
-            formValid: false
+            formValid: false,
+            redirect: false,
+            redirectId: null,
         };
         this.Submit = this.Submit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.PostAd = this.PostAd.bind(this);
     }
     handleInputChange = (e) => {
         const name = e.target.name;
@@ -38,50 +40,13 @@ export class NewAd extends Component {
         this.setState({ [name]: value },
             () => { this.validateField(name, value) });
     }
-    async componentDidMount() {
-      const path = 'https://localhost:44307/api/Auth/user';
-      await fetch(path,  {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include'
-      }).then(response => response.json())
-      .then(response => {
-      
-          this.setState({isAuthenticated:true, userID:response.userID});
-          this.render();
-      
-      })
+    componentWillMount() {
+     if(this.props.loggedInStatus==="LOGGED_IN"){
+       this.setState({isAuthenticated:true, userID:this.props.user.userID});
+     }
     }
-    PostAd() {
-        const path = "https://localhost:44307/api/Auth/user";
-        axios
-            .post(path, JSON.stringify(this.state), {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            })
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
-
     Submit(event) {
         event.preventDefault();
-        // delete this.state.focusedInput;
-        // delete this.state.isAuthenticated;
-        // const host = window.location.host;
-        // const path2 = `https://${host}/api/Status/${this.state.userName}`;
-        // axios.get(path2).then((response) => {
-        //     const userID = response.data;
-        //     this.setState({ userID });
-        //     console.log(`${this.state.userID}`);
-        //     this.PostAd();
-        // });
-        // console.log(JSON.stringify(this.state));
         const path = "https://localhost:44307/api/Advertisement/create";
         axios
             .post(path, JSON.stringify(this.state), {
@@ -91,10 +56,13 @@ export class NewAd extends Component {
             })
             .then((response) => {
                 console.log(response);
+                this.setState({redirect:true, redirectId:response.data.advertisementID});
+                this.render();
             })
             .catch((error) => {
                 console.log(error);
             });
+
     }
 
     validateField(fieldName, value) {
@@ -128,10 +96,13 @@ export class NewAd extends Component {
         return (error.length === 0 ? '' : 'has-error');
     }
     render() {
+      if (this.state.redirect){
+      return (<Redirect to={`/adView/${this.state.redirectId}`} />);}
+      if(this.state.isAuthenticated){
         return (
-            <div className="row">
-                <div className="col-md-3"></div>
-                <div className="col-md-6">
+          <div className="row">
+          <div className="col-md-3"></div>
+          <div className="col-md-6">
                     <form onSubmit={this.Submit}>
                         <h2>Make a new ad</h2>
                         <div className="panel panel-default">
@@ -202,11 +173,14 @@ export class NewAd extends Component {
                                 />
                             </label>
                         </div>
-                        <input type="submit" value="Send" disabled={!this.state.formValid} />
+                        <input type="submit" value="Send" className="btn col-md-12 btn-primary text-center"  disabled={!this.state.formValid} />
                     </form>
                 </div>
             </div>
 
-        );
+        );}
+        else{
+          return(<h1>Please Login or Register</h1>)
+        }
     }
 }

@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 
-export class ListOfAds extends Component {
-    static displayName = ListOfAds.Name;
+export class MyAds extends Component {
+    static displayName = MyAds.Name;
     constructor(props) {
         super(props);
         this.state = {
@@ -16,7 +16,7 @@ export class ListOfAds extends Component {
 
 
     componentDidMount() {
-        const path = `https://localhost:44307/api/Advertisement/getAll`;
+        const path = `https://localhost:44307/api/Advertisement/getByUserId/${this.props.user.userID}`;
         axios.get(path).then((response) => {
             const Ads = response.data;
             const isLoading = true;
@@ -129,6 +129,6 @@ export class ListOfAds extends Component {
             </div>
         );
     }
+  }
 
 
-}

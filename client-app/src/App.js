@@ -11,6 +11,9 @@ import { BrowserRouter, Route } from "react-router-dom"
 import { Layout } from './components/Layout';
 import { Logout} from './components/Logout';
 import { ListOfAds} from './Advertisement/ListOfAds';
+import { EditAd} from './Advertisement/EditAd';
+import { AdView} from './Advertisement/AdView';
+import { MyAds} from './Advertisement/MyAds';
 
 
 export class App extends Component {
@@ -76,7 +79,10 @@ export class App extends Component {
             <Route path="/login" exact render={(props)=>(<Login{...props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus}/>)}/>
             <Route path="/logout" exact render={(props)=>(<Logout{...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus}/>)}/>
             <Route path="/register" render={(props)=>(<Register{...props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus}/>)}/>
-            <Route exact path="/newAd" render={(props)=>(<NewAd{...props} loggedInStatus={this.state.loggedInStatus}/>)}/>
+            <Route path="/newAd" render={(props)=>(<NewAd{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
+            <Route path="/adView/:id" render={(props)=>(<AdView{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
+            <Route path="/editAd/:id" render={(props)=>(<EditAd{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
+            <Route path="/myAds" render={(props)=>(<MyAds{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
       </Layout>
       </BrowserRouter>
             

@@ -58,7 +58,6 @@ namespace HouseService.BLL.Logics
                 ad.Price = dto.Price;
                 ad.StartDate = dto.StartDate;
                 ad.EndDate = dto.EndDate;
-                ad.StatusID = dto.StatusID;
                 var resad = await this.ads.Edit(ad);
                 return resad;
             }

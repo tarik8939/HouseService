@@ -9,6 +9,7 @@ import {
     SingleDatePicker,
     DayPickerRangeController
 } from "react-dates";
+import { Redirect } from 'react-router-dom';
 
 export class EditAd extends Component {
     static displayName = EditAd.name;
@@ -23,6 +24,7 @@ export class EditAd extends Component {
             startDate: null,
             endDate: null,
             price: "",
+            userID: null
         }
         // this.handleInput = this.handleInput.bind(this);
     }
@@ -52,8 +54,10 @@ export class EditAd extends Component {
                 // startDate: Ad.startDate,
                 // endDate: Ad.endDate,
                 price: Ad.price,
+                userID: Ad.userID,
                 loaded: loaded,
-                Ad: Ad
+                Ad: Ad,
+                redirect: false
             })
             console.log(Ad)
         });
@@ -62,15 +66,24 @@ export class EditAd extends Component {
     Submit(event) {
         event.preventDefault();
         const path = `https://localhost:44307/api/Advertisement/edit/${this.state.Ad.advertisementID}`;
-        delete this.state.Ad;
         axios
-            .post(path, JSON.stringify(this.state), {
+            .put(path, {
+                name: this.state.name,
+                description: this.state.description,
+                address: this.state.address,
+                startDate: this.state.startDate,
+                endDate: this.state.endDate,
+                price: this.state.price,
+                userID: this.state.userID,
+            }, {
                 headers: {
                     "Content-Type": "application/json",
                 },
             })
             .then((response) => {
                 console.log(response);
+                this.setState({redirect:true});
+                this.render();
             })
             .catch((error) => {
                 console.log(error);
@@ -83,6 +96,8 @@ export class EditAd extends Component {
 
 
     render() {
+        if (this.state.redirect){
+        return (<Redirect to={`/AdView/${this.state.Ad.advertisementID}`} />);}
         if (this.state.loaded === false) {
             return this.loadingView()
         }
