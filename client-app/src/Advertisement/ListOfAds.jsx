@@ -65,30 +65,37 @@ export class ListOfAds extends Component {
         const RenderAds = () => {
             if (this.state.isLoading == true) {
                 return (
-                    <div className="col-md-8">
-                        {this.state.Ads.filter(ad => ad.name.includes(this.state.title)).map((item, index) => (
-                            <div key={index} className="border border-primary rounded m-1 ml-4">
-                                <div className="row">
-                                    <span className="col-md-2"><h5>{item.name}</h5></span>
-                                    <span className="text-success col-md-2">{item.price}</span>
-                                </div>
-                                <div className="row">
-                                    <p className="col-2">{item.description}</p>
-                                </div>
+                    <div className="row">
+                        <div className="col-md-1"></div>
+                        <div className="col-md-10">
+                            {this.state.Ads.filter(ad => ad.name.includes(this.state.title)).map((item, index) => (
+                                <div key={index} className="border border-primary rounded m-1 ml-4">
+                                    <div className="row">
+                                        <span className="col-md-2"><h5>{item.name}</h5></span>
+                                        <span className="col-md-8"></span>
+                                        <span className="text-success col-md-2">{item.price}</span>
+                                    </div>
+                                    <div className="row">
+                                        <p className="col-2">{item.description}</p>
+                                    </div>
 
-                                <div className="row">
-                                    <span className="text-primary col-2">{item.user.fullName}</span>
-                                    <span className="col-3">From: {moment(item.startDate).format('L')}</span>
-                                    <span className="col-3">Until: {moment(item.endDate).format('L')}</span>
-                                    <span className="col-3">
-                                        <Link to={`/AdView/${item.advertisementID}`}>
-                                            Details
-                                        </Link>
-                                    </span>
+
+                                    <div className="row">
+                                        <span className="text-primary col-2">{item.user.fullName}</span>
+                                        <span className="col-3">From: {moment(item.startDate).format('L')}</span>
+                                        <span className="col-3">Until: {moment(item.endDate).format('L')}</span>
+                                        <span className="col-1"></span>
+                                        <span className="col-3 pl-7">
+                                            <Link to={`/AdView/${item.advertisementID}`}>
+                                                Details
+                                            </Link>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
+
                 )
             } else {
                 return (
