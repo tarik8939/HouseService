@@ -44,13 +44,12 @@ namespace HouseService.DAL.Functions
             await _context.SaveChangesAsync();
             return advertisement;
         }
-
+        //Не завантажувати Status
         public async Task<List<Advertisement>> GetAll()
         {
             List<Advertisement> ads = new List<Advertisement>();
             ads = await _context.Advertisements
                 .Include(x => x.User)
-                .Include(x => x.Status)
                 .Where(x=>x.StatusID==1)
                 .ToListAsync(); 
 

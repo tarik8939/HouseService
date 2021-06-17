@@ -44,14 +44,25 @@ export default class Ad extends Component {
         const { data } = this.state;
 
         const renderBtn = (item) => {
-            if (item.statusID == 1) {
-                return (
-                    <a className="text-danger ml-2" onClick={(e) => this.changeStatus(item, e)}>Cancel</a>
-                )
+            if (item.status != null) {
+                if (item.statusID == 1) {
+                    return (
+                        <a className="text-danger ml-2" onClick={(e) => this.changeStatus(item, e)}>Cancel</a>
+                    )
+                }
+                else if (item.statusID == 2) {
+                    return (
+                        <a className="text-success ml-2" onClick={(e) => this.changeStatus(item, e)}>Publish</a>
+                    )
+                }
             }
-            else if (item.statusID == 2) {
+
+        }
+
+        const renderStatus = (item) => {
+            if (item.status != null) {
                 return (
-                    <a className="text-success ml-2" onClick={(e) => this.changeStatus(item, e)}>Publish</a>
+                    <p className="col-11 ml-3 ">Status: {data.status.statusName}</p>
                 )
             }
         }
@@ -66,7 +77,7 @@ export default class Ad extends Component {
                 </div>
                 <div className="row">
                     <p className="col-11 ml-3 mt-2">{data.description}</p>
-                    <p className="col-11 ml-3 ">Status: {data.status.statusName}</p>
+                    {renderStatus(data)}
                 </div>
 
 

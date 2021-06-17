@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
+import Ad from './Ad';
 
 export class ListOfAds extends Component {
     static displayName = ListOfAds.Name;
@@ -69,29 +70,7 @@ export class ListOfAds extends Component {
                         <div className="col-md-1"></div>
                         <div className="col-md-10">
                             {this.state.Ads.filter(ad => ad.name.toLowerCase().includes(this.state.title.toLowerCase())).map((item, index) => (
-                                <div key={index} className="border border-primary rounded m-1 ml-4">
-                                    <div className="row">
-                                        <span className="col-4 ml-3 mt-2"><h5>{item.name}</h5></span>
-                                        <span className="col-6"></span>
-                                        <span className="text-success col-1 ml-5  mt-2">{item.price}$</span>
-                                    </div>
-                                    <div className="row">
-                                        <p className="col-11 ml-3 mt-2">{item.description}</p>
-                                    </div>
-
-
-                                    <div className="row">
-                                        <span className="text-primary col-2 ml-3 mb-2 ">{item.user.fullName}</span>
-                                        <span className="col-2 ml-3 mb-2 ">From: {moment(item.startDate).format('L')}</span>
-                                        <span className="col-2 ml-3 mb-2 ">Until: {moment(item.endDate).format('L')}</span>
-                                        <span className="col-4"></span>
-                                        <span className="col-1 pl-7 ml-3 mb-2 ">
-                                            <Link to={`/AdView/${item.advertisementID}`}>
-                                                Details
-                                            </Link>
-                                        </span>
-                                    </div>
-                                </div>
+                                <Ad key={index} dataParent={item} />
                             ))}
                         </div>
                     </div>
