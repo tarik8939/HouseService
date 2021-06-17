@@ -3,6 +3,7 @@ import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import moment from "moment";
 import { Redirect } from 'react-router-dom';
+import ReqForAd from './ReqForAd';
 export class AdView extends Component {
     constructor(props) {
         super(props)
@@ -24,8 +25,9 @@ export class AdView extends Component {
         });
     }
     render() {
-       if (this.state.redirect){
-        return (<Redirect to={`/editAd/${this.state.Ad.advertisementID}`} />);}
+        if (this.state.redirect) {
+            return (<Redirect to={`/editAd/${this.state.Ad.advertisementID}`} />);
+        }
         if (this.state.loaded == false) {
             return this.loadingView()
         }
@@ -40,18 +42,21 @@ export class AdView extends Component {
         )
     }
     Edit(event) {
-      event.preventDefault();
-      this.setState({redirect: true});
-      this.render();
+        event.preventDefault();
+        this.setState({ redirect: true });
+        this.render();
     }
     isLoadView() {
-      const ForHouseOwner = () => {
-        if(this.state.Ad.userID === this.props.user.userID){
-          return(
-          <input type="button" value="Edit" onClick={(e) => this.Edit(e)}
-          className="btn col-md-12 btn-primary text-center" />)
+        const ForHouseOwner = () => {
+            if (this.state.Ad.userID === this.props.user.userID) {
+                return (
+                    <div>
+                        <input type="button" value="Edit" onClick={(e) => this.Edit(e)}
+                            className="btn col-md-12 btn-primary text-center" />
+                    </div>
+                )
+            }
         }
-      }
         return (
             <div className="container">
                 <div className="row">
@@ -79,7 +84,12 @@ export class AdView extends Component {
                             <span className=" col-md-2 text-success">{this.state.Ad.price}$</span>
                         </div>
                         <div className="row justify-content-center mt-4">
-                        {ForHouseOwner()}
+                            {ForHouseOwner()}
+                        </div>
+                        <div className="row justify-content-center mt-4">
+                            {this.state.Ad.requests.map((item, index) =>(
+                                <ReqForAd key={index} dataParent ={item}/>
+                            ))}
                         </div>
                     </div>
                 </div>

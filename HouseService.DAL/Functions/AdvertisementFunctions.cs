@@ -51,6 +51,7 @@ namespace HouseService.DAL.Functions
             ads = await _context.Advertisements
                 .Include(x => x.User)
                 .Include(x => x.Status)
+                .Where(x=>x.StatusID==1)
                 .ToListAsync(); 
 
             return ads;
@@ -61,6 +62,8 @@ namespace HouseService.DAL.Functions
             var advertisement = await _context.Advertisements
                 .Include(x => x.User)
                 .Include(x => x.Status)
+                .Include(x=>x.Requests)
+                .ThenInclude(x=>x.User)
                 .FirstOrDefaultAsync(x => x.AdvertisementID == id);
 
             if (advertisement == null)
