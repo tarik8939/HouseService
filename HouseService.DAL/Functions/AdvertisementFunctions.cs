@@ -50,7 +50,6 @@ namespace HouseService.DAL.Functions
             List<Advertisement> ads = new List<Advertisement>();
             ads = await _context.Advertisements
                 .Include(x => x.User)
-                .Where(x=>x.StatusID==1)
                 .ToListAsync(); 
 
             return ads;

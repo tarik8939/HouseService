@@ -19,7 +19,7 @@ export class ListOfAds extends Component {
     componentDidMount() {
         const path = `https://localhost:44307/api/Advertisement/getAll`;
         axios.get(path).then((response) => {
-            const Ads = response.data;
+            const Ads = response.data.filter(x => x.statusID == 1);
             const isLoading = true;
             this.setState({ Ads, isLoading });
             console.log(this.state)
