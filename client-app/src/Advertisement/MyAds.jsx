@@ -18,6 +18,9 @@ export class MyAds extends Component {
 
 
     componentDidMount() {
+        this.load()
+    }
+    load() {
         const path = `https://localhost:44307/api/Advertisement/getByUserId/${this.props.user.userID}`;
         axios.get(path).then((response) => {
             const Ads = response.data;
@@ -27,7 +30,6 @@ export class MyAds extends Component {
             console.log(response)
         });
     }
-
     HandleValueChange(event) {
         event.preventDefault();
         let value = event.target.value;
@@ -74,10 +76,11 @@ export class MyAds extends Component {
             },
         }).then(response => {
             console.log(response)
+            this.load()
         }).catch((error) => {
             console.log(error)
         })
-        this.render();
+
     }
 
 
@@ -111,7 +114,7 @@ export class MyAds extends Component {
                                     </div>
                                     <div className="row">
                                         <p className="col-11 ml-3 mt-2">{item.description}</p>
-                                        <p className="col-11 ml-3 ">{item.status.statusName}</p>
+                                        <p className="col-11 ml-3 ">Status: {item.status.statusName}</p>
                                     </div>
 
 
