@@ -68,7 +68,7 @@ export class ListOfAds extends Component {
                     <div className="row">
                         <div className="col-md-1"></div>
                         <div className="col-md-10">
-                            {this.state.Ads.filter(ad => ad.name.includes(this.state.title)).map((item, index) => (
+                            {this.state.Ads.filter(ad => ad.name.toLowerCase().includes(this.state.title.toLowerCase())).map((item, index) => (
                                 <div key={index} className="border border-primary rounded m-1 ml-4">
                                     <div className="row">
                                         <span className="col-4 ml-3 mt-2"><h5>{item.name}</h5></span>
@@ -121,7 +121,7 @@ export class ListOfAds extends Component {
                         <option value="Price">Price</option>
                         <option value="Date">Date</option>
                     </select>
-                    <p className="col-md-3">{this.state.Ads.filter(ad => ad.name.includes(this.state.title)).length} searched results</p>
+                    <p className="col-md-3">{this.state.Ads.filter(ad => ad.name.toLowerCase().includes(this.state.title.toLowerCase())).length} searched results</p>
                 </div>
 
                 <div className="col-md-3"></div>

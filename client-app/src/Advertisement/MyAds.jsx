@@ -68,7 +68,7 @@ export class MyAds extends Component {
                     <div className="row">
                         <div className="col-md-1"></div>
                         <div className="col-md-10">
-                            {this.state.Ads.filter(ad => ad.name.includes(this.state.title)).map((item, index) => (
+                            {this.state.Ads.filter(ad => ad.name.toLowerCase().includes(this.state.title.toLowerCase())).map((item, index) => (
                                 <div key={index} className="border border-primary rounded m-1 ml-4">
                                     <div className="row">
                                         <span className="col-4 ml-3 mt-2"><h5>{item.name}</h5></span>
@@ -77,6 +77,7 @@ export class MyAds extends Component {
                                     </div>
                                     <div className="row">
                                         <p className="col-11 ml-3 mt-2">{item.description}</p>
+                                        <p className="col-11 ml-3 ">{item.status.statusName}</p>
                                     </div>
 
 
@@ -84,8 +85,8 @@ export class MyAds extends Component {
                                         <span className="text-primary col-2 ml-3 mb-2 ">{item.user.fullName}</span>
                                         <span className="col-2 ml-3 mb-2 ">From: {moment(item.startDate).format('L')}</span>
                                         <span className="col-2 ml-3 mb-2 ">Until: {moment(item.endDate).format('L')}</span>
-                                        <span className="col-4"></span>
-                                        <span className="col-1 pl-7 ml-3 mb-2 ">
+                                        <span className="col-3"></span>
+                                        <span className="col-2 pl-7 ml-3 mb-2 ">
                                             <Link to={`/AdView/${item.advertisementID}`}>
                                                 Details
                                             </Link>
@@ -121,7 +122,7 @@ export class MyAds extends Component {
                         <option value="Price">Price</option>
                         <option value="Date">Date</option>
                     </select>
-                    <p className="col-md-3">{this.state.Ads.filter(ad => ad.name.includes(this.state.title)).length} searched results</p>
+                    <p className="col-md-3">{this.state.Ads.filter(ad => ad.name.toLowerCase().includes(this.state.title.toLowerCase())).length} searched results</p>
                 </div>
 
                 <div className="col-md-3"></div>
@@ -129,6 +130,6 @@ export class MyAds extends Component {
             </div>
         );
     }
-  }
+}
 
 
