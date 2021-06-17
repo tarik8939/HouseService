@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 
+import '../App.css';
+
 export class MyAds extends Component {
     static displayName = MyAds.Name;
     constructor(props) {
@@ -59,9 +61,41 @@ export class MyAds extends Component {
                 break;
         }
     }
+    changeStatus(item) {
+        let statusId;
+        if (item.statusID == 1)
+            statusId = 2
+        else if (item.statusID == 2)
+            statusId = 1
+        const path = `https://localhost:44307/api/Advertisement/changeStatus/${item.advertisementID}/${statusId}`;
+        axios.put(path, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then(response => {
+            console.log(response)
+        }).catch((error) => {
+            console.log(error)
+        })
+        this.render();
+    }
 
 
     render() {
+
+        const renderBtn = (item) => {
+            if (item.statusID == 1) {
+                return (
+                    <a className="text-danger ml-2" onClick={(e) => this.changeStatus(item, e)}>Cancel</a>
+                )
+            }
+            else if (item.statusID == 2) {
+                return (
+                    <a className="text-success ml-2" onClick={(e) => this.changeStatus(item, e)}>Publish</a>
+                )
+            }
+        }
+
         const RenderAds = () => {
             if (this.state.isLoading == true) {
                 return (
@@ -90,6 +124,7 @@ export class MyAds extends Component {
                                             <Link to={`/AdView/${item.advertisementID}`}>
                                                 Details
                                             </Link>
+                                            {renderBtn(item)}
                                         </span>
                                     </div>
                                 </div>
