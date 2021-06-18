@@ -18,7 +18,7 @@ namespace HouseService.DAL.Models
         [Key]
         public int StateID { get; set; }
         [Required]
-        public string StatusName { get; set; }
+        public string StateName { get; set; }
 
         public virtual ICollection<Request> Requests { get; set; }
     }
