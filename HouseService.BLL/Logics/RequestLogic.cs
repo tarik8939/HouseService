@@ -41,6 +41,18 @@ namespace HouseService.BLL.Logics
             {
                 request.StateID = stateId;
                 var resad = await this.requests.Edit(request);
+                if (stateId == 3)
+                {
+                    var requests = await this.requests.GetByAdvertisement(request.AdvertisementID);
+                    foreach (var var in requests)
+                    {
+                        if (var.RequestID != resad.RequestID)
+                        {
+                            var.StateID = 2;
+                            await this.requests.Edit(var);
+                        }
+                    }
+                }
                 return resad;
             }
             return null;

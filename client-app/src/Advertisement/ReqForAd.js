@@ -22,6 +22,7 @@ export default class ReqForAd extends Component {
         }).catch((error) => {
             console.log(error)
         })
+        window.location.reload();
     }
 
 

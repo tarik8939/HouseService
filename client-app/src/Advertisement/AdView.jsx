@@ -87,7 +87,7 @@ export class AdView extends Component {
                             {ForHouseOwner()}
                         </div>
                         <div className="row justify-content-center mt-4">
-                            {this.state.Ad.requests.filter(x => x.stateID == 1).map((item, index) => (
+                            {this.state.Ad.requests.filter(x => x.stateID == 1 || x.stateID == 3).map((item, index) => (
                                 <ReqForAd key={index} dataParent={item} />
                             ))}
                         </div>
