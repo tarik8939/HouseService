@@ -67,7 +67,7 @@ namespace HouseService.DAL.Functions
                 .Include(x => x.User)
                 .Include(x => x.Advertisement)
                 .Include(x => x.State)
-                .FirstOrDefaultAsync(x => x.AdvertisementID == id);
+                .FirstOrDefaultAsync(x => x.RequestID == id);
 
             if (request == null)
             {

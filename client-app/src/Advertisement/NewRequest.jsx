@@ -10,18 +10,19 @@ export default class NewRequest extends Component {
       advertisementID: null,
       comment : "",
       request: null
-    }
+    };
     this.Submit = this.Submit.bind(this);
   }
   handleInputChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    this.setState({ [name]: value },
-     );
+    this.setState({ [name]: value });
   }
-  componentWillMount() {
-    this.setState({userID: this.props.userID, advertisementID: this.props.advertisementID});
-    const path = `https://localhost:44307/api/Request/getForUser/${this.state.userID}&${this.state.advertisementID}`;
+  componentDidMount() {
+    const userID = this.props.userID;
+    const advertisementID = this.props.advertisementID;
+    this.setState({userID, advertisementID});
+    const path = `https://localhost:44307/api/Request/getForUser/${this.props.userID}&${this.props.advertisementID}`;
     axios.get(path).then(response => {
       const request = response.data;
       this.setState({ request})
@@ -53,10 +54,7 @@ export default class NewRequest extends Component {
     if(this.state.request!=null){
       return (
         <div>
-            <h2>Your request status:</h2>
-            <label className="col-md-8">
-                {this.state.request.state.stateName}
-            </label>
+            <h3>Your request status: {this.state.request.state.stateName}</h3>
         </div>
   
       );

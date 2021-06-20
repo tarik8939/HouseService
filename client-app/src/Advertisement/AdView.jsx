@@ -14,8 +14,6 @@ export class AdView extends Component {
             redirect: false,
         }
     }
-    componentWillMount() {
-    }
     load(){
       const id = this.props.match.params.id;
         var path = `https://localhost:44307/api/Advertisement/getById/${id}`;
