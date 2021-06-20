@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
-import Ad from './Ad';
+import Ad from "./Ad";
 
 import '../App.css';
 
@@ -15,11 +15,6 @@ export class MyAds extends Component {
             title: "",
             isLoading: false,
         }
-    }
-
-
-    componentDidMount() {
-        this.load()
     }
     load() {
         const path = `https://localhost:44307/api/Advertisement/getByUserId/${this.props.user.userID}`;
@@ -66,7 +61,15 @@ export class MyAds extends Component {
     }
 
     render() {
-
+      if (this.props.loggedInStatus === "LOGGED_IN") {
+        this.load();
+        return this.authenticatedView();
+      }
+    else if(this.props.loggedInStatus === "NOT_LOGGED_IN"){
+        return this.notAuthenticatedView();
+      }
+    }
+    authenticatedView(){
         const RenderAds = () => {
             if (this.state.isLoading == true) {
                 return (
@@ -110,7 +113,11 @@ export class MyAds extends Component {
                 {RenderAds()}
             </div>
         );
-    }
+  }
+  notAuthenticatedView(){
+    return(<h1>You're not logged in</h1>)
+  }
 }
+
 
 

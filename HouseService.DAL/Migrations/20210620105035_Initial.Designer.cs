@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HouseService.DAL.Migrations
 {
     [DbContext(typeof(HouseDbContext))]
-    [Migration("20210614195042_Final")]
-    partial class Final
+    [Migration("20210620105035_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -76,6 +76,11 @@ namespace HouseService.DAL.Migrations
 
                     b.Property<int>("AdvertisementID")
                         .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("StateID")
                         .HasColumnType("int");
@@ -160,6 +165,9 @@ namespace HouseService.DAL.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("UserID");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.HasIndex("UserTypeID");
 

@@ -14,6 +14,9 @@ namespace HouseService.DAL.Models
         public int RequestID { get; set; }
         public int? UserID { get; set; }
         [Required]
+        [MaxLength(200)]
+        public string Comment { get; set; }
+        [Required]
         public int AdvertisementID { get; set; }
         [Required]
         public int StateID { get; set; }

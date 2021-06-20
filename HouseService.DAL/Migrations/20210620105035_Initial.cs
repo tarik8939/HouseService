@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HouseService.DAL.Migrations
 {
-    public partial class Final : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -109,6 +109,7 @@ namespace HouseService.DAL.Migrations
                     RequestID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserID = table.Column<int>(type: "int", nullable: true),
+                    Comment = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     AdvertisementID = table.Column<int>(type: "int", nullable: false),
                     StateID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -159,6 +160,12 @@ namespace HouseService.DAL.Migrations
                 name: "IX_Requests_UserID",
                 table: "Requests",
                 column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_UserTypeID",

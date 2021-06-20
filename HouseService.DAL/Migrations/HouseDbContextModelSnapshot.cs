@@ -75,6 +75,11 @@ namespace HouseService.DAL.Migrations
                     b.Property<int>("AdvertisementID")
                         .HasColumnType("int");
 
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<int>("StateID")
                         .HasColumnType("int");
 

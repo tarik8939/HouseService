@@ -10,6 +10,7 @@ namespace HouseService.BLL.DTOs
     {
         public int UserID { get; set; }
         public int AdvertisementID { get; set; }
+        public string Comment { get; set; }
         public int StateID { get; set; }
     }
 }

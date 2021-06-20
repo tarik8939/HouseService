@@ -37,10 +37,13 @@ export default class ReqForAd extends Component {
                         <span className="col-md-4">
                             <p>Contractor: {data.user.fullName}</p>
                         </span>
-                        <span className="col-md-3">
+                        <span className="col-md-4">
+                            <p>Comment: {data.comment}</p>
+                        </span>
+                        <span className="col-md-2">
                             <p>{data.user.phoneNum}</p>
                         </span>
-                        <span className="col-md-4">
+                        <span className="col-md-2">
                             <p>{data.user.email}</p>
                         </span>
                     </div>

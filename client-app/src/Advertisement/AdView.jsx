@@ -3,7 +3,8 @@ import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import moment from "moment";
 import { Redirect } from 'react-router-dom';
-import ReqForAd from './ReqForAd';
+import ReqForAd  from "./ReqForAd";
+import NewRequest from "./NewRequest";
 export class AdView extends Component {
     constructor(props) {
         super(props)
@@ -13,8 +14,10 @@ export class AdView extends Component {
             redirect: false,
         }
     }
-    componentDidMount() {
-        const id = this.props.match.params.id;
+    componentWillMount() {
+    }
+    load(){
+      const id = this.props.match.params.id;
         var path = `https://localhost:44307/api/Advertisement/getById/${id}`;
         axios.get(path).then(response => {
             const Ad = response.data;
@@ -24,38 +27,39 @@ export class AdView extends Component {
             console.log(this.state.loaded)
         });
     }
-    render() {
-        if (this.state.redirect) {
+    render() {        if (this.state.redirect) {
             return (<Redirect to={`/editAd/${this.state.Ad.advertisementID}`} />);
         }
         if (this.state.loaded == false) {
-            return this.loadingView()
+            this.load();
+            return (
+              <p>Loading...</p>
+            )
         }
         else {
-            return this.isLoadView()
-        }
-
-    }
-    loadingView() {
-        return (
-            <p>Loading...</p>
-        )
-    }
-    Edit(event) {
-        event.preventDefault();
-        this.setState({ redirect: true });
-        this.render();
-    }
-    isLoadView() {
-        const ForHouseOwner = () => {
+          const ForHouseOwner = () => {
             if (this.state.Ad.userID === this.props.user.userID) {
                 return (
                     <div>
                         <input type="button" value="Edit" onClick={(e) => this.Edit(e)}
                             className="btn col-md-12 btn-primary text-center" />
+                            <div className="row justify-content-center mt-4">
+                            {this.state.Ad.requests.filter(x => x.stateID == 1 || x.stateID == 3).map((item, index) => (
+                                <ReqForAd key={index} dataParent={item} />
+                            ))}
+                        </div>
                     </div>
+                    
+
                 )
             }
+        }
+        const ForContractor = () => {
+          if (this.props.user.userTypeID === 2) {
+              return (
+                 <NewRequest userID={this.props.user.userID} advertisementID = {this.state.Ad.advertisementID} />
+              )
+          }
         }
         return (
             <div className="container">
@@ -85,15 +89,18 @@ export class AdView extends Component {
                         </div>
                         <div className="row justify-content-center mt-4">
                             {ForHouseOwner()}
-                        </div>
-                        <div className="row justify-content-center mt-4">
-                            {this.state.Ad.requests.filter(x => x.stateID == 1 || x.stateID == 3).map((item, index) => (
-                                <ReqForAd key={index} dataParent={item} />
-                            ))}
+                            {ForContractor()}
                         </div>
                     </div>
                 </div>
             </div>
         )
+        }
+
+    }
+    Edit(event) {
+        event.preventDefault();
+        this.setState({ redirect: true });
+        this.render();
     }
 }

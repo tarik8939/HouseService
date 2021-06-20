@@ -15,6 +15,7 @@ namespace HouseService.DAL.Interfaces
         Task<Boolean> Delete(int id);
         Task<List<Request>> GetByUser(int userId);
         Task<List<Request>> GetByAdvertisement(int advertisementId);
+        Task<Request> GetForUserByAd(int userId, int advertisementId);
 
     }
 }

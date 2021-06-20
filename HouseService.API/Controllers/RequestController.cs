@@ -38,7 +38,14 @@ namespace HouseService.API.Controllers
             var reqList = await _logic.GetByAdvertisement(id);
             return reqList;
         }
-        
+
+        [HttpGet("getForUser/{userId}&{advertisementId}")]
+        public async Task<Request> GetForUserByAd(int userId, int advertisementId)
+        {
+            var req = await _logic.GetForUserByAd(userId, advertisementId);
+            return req;
+        }
+
         [HttpPost("create")]
         public async Task<Request> PostRequest(RequestDto request)
         {

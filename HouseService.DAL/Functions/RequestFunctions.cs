@@ -93,5 +93,20 @@ namespace HouseService.DAL.Functions
 
             return request;
         }
+
+        public async Task<Request> GetForUserByAd(int userId, int advertisementId)
+        {
+            var request = await _context.Requests
+                 .Include(x => x.State)
+                 .FirstOrDefaultAsync(x => x.AdvertisementID == advertisementId && x.UserID == userId);
+
+            if (request == null)
+            {
+                return null;
+            }
+
+            return request;
+
+        }
     }
 }

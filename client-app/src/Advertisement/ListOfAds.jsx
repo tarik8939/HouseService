@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
-import Ad from './Ad';
+import Ad from "./Ad";
 
 export class ListOfAds extends Component {
     static displayName = ListOfAds.Name;
@@ -17,16 +17,19 @@ export class ListOfAds extends Component {
 
 
     componentDidMount() {
-        const path = `https://localhost:44307/api/Advertisement/getAll`;
-        axios.get(path).then((response) => {
-            const Ads = response.data.filter(x => x.statusID == 1);
-            const isLoading = true;
-            this.setState({ Ads, isLoading });
-            console.log(this.state)
-            console.log(response)
-        });
+      this.load();
     }
-
+    load(){
+      const path = `https://localhost:44307/api/Advertisement/getAll`;
+      axios.get(path).then((response) => {
+          const Ads = response.data.filter(x => x.statusID == 1);
+          const isLoading = true;
+          this.setState({ Ads, isLoading });
+          this.render();
+          console.log(this.state)
+          console.log(response)
+      });
+    }
     HandleValueChange(event) {
         event.preventDefault();
         let value = event.target.value;

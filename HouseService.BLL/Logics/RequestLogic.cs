@@ -21,6 +21,7 @@ namespace HouseService.BLL.Logics
             {
                 UserID = dto.UserID,
                 AdvertisementID = dto.AdvertisementID,
+                Comment = dto.Comment,
                 StateID = 1
             };
             var result = await this.requests.Create(request);
@@ -90,6 +91,16 @@ namespace HouseService.BLL.Logics
         public async Task<List<Request>> GetByAdvertisement(int advertisementId)
         {
             var request = await this.requests.GetByAdvertisement(advertisementId);
+            if (request == null)
+            {
+                return null;
+            }
+            return request;
+        }
+
+        public async Task<Request> GetForUserByAd(int userId, int advertisementId)
+        {
+            var request = await this.requests.GetForUserByAd(userId, advertisementId);
             if (request == null)
             {
                 return null;
