@@ -26,7 +26,7 @@ export default class Req extends Component {
     const path = `https://localhost:44307/api/Request/delete/${id}`;
     axios.delete(path).then(response => {
       console.log(response);
-      window.location.reload();
+      this.props.load();
     })
 
   }

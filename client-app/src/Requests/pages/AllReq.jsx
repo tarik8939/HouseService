@@ -10,9 +10,13 @@ export class AllReq extends Component {
     this.state = {
       Reqs: [],
     }
+    this.load=this.load.bind(this);
   }
 
   componentDidMount() {
+    this.load();
+  }
+  load(){
     const userID = this.props.user.userID;
     const path = `https://localhost:44307/api/Request/getByUserId/${userID}`;
     axios.get(path).then((response) => {
@@ -40,7 +44,7 @@ export class AllReq extends Component {
         <div className="col-md-10">
           <h1 className="text-center">My requests</h1>
           {this.state.Reqs.map((item, index) => (
-             <Req key={index} req={item} />
+             <Req key={index} req={item} load={this.load} />
           ))}
 
         </div>

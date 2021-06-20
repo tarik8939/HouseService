@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Container } from 'reactstrap';
 import React, { Component } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 import { Layout } from './components/Layout';
 import { Login } from "./Authorization/pages/Login";
 import { Register } from "./Authorization/pages/Register";
@@ -11,9 +11,7 @@ import { NewAd } from "./Advertisement/pages/NewAd"
 import { ListOfAds } from './Advertisement/pages/ListOfAds/ListOfAds';
 import { EditAd } from './Advertisement/pages/EditAd/EditAd';
 import { AdView } from './Advertisement/pages/AdView/AdView';
-import { MyAds } from './Advertisement/pages/MyAds';
 import { AllReq } from './Requests/pages/AllReq';
-
 
 export class App extends Component {
   constructor() {
@@ -57,7 +55,7 @@ export class App extends Component {
   componentDidMount() {
     this.checkLoginStatus();
   }
-
+  
   handleLogout() {
     this.setState({
       loggedInStatus: "NOT_LOGGED_IN",
@@ -72,7 +70,8 @@ export class App extends Component {
   }
   render() {
     return (
-      <BrowserRouter>
+      
+      <BrowserRouter >
         <Layout loggedInStatus={this.state.loggedInStatus} user={this.state.user}>
           <Route path={"/"} exact render={(props) => (<ListOfAds{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
           <Route path="/login" exact render={(props) => (<Login{...props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus}/>)}/>
@@ -81,14 +80,13 @@ export class App extends Component {
           <Route path="/newAd" render={(props) => (<NewAd{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
           <Route path="/adView/:id" render={(props) => (<AdView{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
           <Route path="/editAd/:id" render={(props) => (<EditAd{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
-          <Route path="/myAds" render={(props) => (<MyAds{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
-          <Route path="/AllReq" render={(props) => (<AllReq{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
-        
+          <Route exact path="/myAds" render={(props) => (<ListOfAds{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user} myAds={true}/>)}/>
+          <Route path="/AllReq" render={(props) => (<AllReq{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>    
         </Layout>
       </BrowserRouter>
+
 
     );
   }
 }
-
-export default App;
+export default App

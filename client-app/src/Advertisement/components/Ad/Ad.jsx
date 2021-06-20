@@ -7,7 +7,7 @@ export default class Ad extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: this.props.dataParent
+            data: null
         }
     }
 
@@ -25,12 +25,14 @@ export default class Ad extends Component {
             },
         }).then(response => {
             console.log(response)
-            this.load()
+            this.props.load();
         }).catch((error) => {
             console.log(error)
         })
     }
-
+    componentWillMount(){
+      this.setState({data:this.props.dataParent})
+    }
     load() {
         const path = `https://localhost:44307/api/Advertisement/getById/${this.state.data.advertisementID}`;
         axios.get(path).then((response) => {
@@ -42,11 +44,15 @@ export default class Ad extends Component {
     }
 
     render() {
+      if(this.state.data){
       return(
         <AdComponent
             changeStatus={this.changeStatus}
-            data={this.state.data}
+            data={this.props.dataParent}
+            key={this.props.key}
         />
     )
+      }
+      else return(<h1>loading</h1>);
     }
 }

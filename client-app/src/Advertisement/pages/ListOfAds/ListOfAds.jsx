@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
-import moment from "moment";
-import Ad from "../../components/Ad/Ad";
+import ListOfAdsComponent from "./ListOfAdsComponent";
 
 export class ListOfAds extends Component {
     static displayName = ListOfAds.Name;
@@ -13,6 +11,9 @@ export class ListOfAds extends Component {
             title: "",
             isLoading: false,
         }
+        this.onSort = this.onSort.bind(this);
+        this.HandleValueChange = this.HandleValueChange.bind(this);
+        this.load = this.load.bind(this);
     }
 
 
@@ -20,15 +21,27 @@ export class ListOfAds extends Component {
       this.load();
     }
     load(){
+      if (this.props.loggedInStatus === "LOGGED_IN" && this.props.myAds) {
+        const path = `https://localhost:44307/api/Advertisement/getByUserId/${this.props.user.userID}`;
+        axios.get(path).then((response) => {
+            const Ads = response.data;
+            const isLoading = true;
+            this.setState({ Ads, isLoading });
+            console.log(this.state)
+            console.log(response)
+        });
+      }
+    else{
       const path = `https://localhost:44307/api/Advertisement/getAll`;
       axios.get(path).then((response) => {
           const Ads = response.data.filter(x => x.statusID == 1);
           const isLoading = true;
           this.setState({ Ads, isLoading });
-          this.render();
           console.log(this.state)
           console.log(response)
       });
+      }
+      
     }
     HandleValueChange(event) {
         event.preventDefault();
@@ -37,6 +50,7 @@ export class ListOfAds extends Component {
         this.setState({
             [event.target.name]: event.target.value,
         });
+        this.load();
     }
     onSort(event) {
         event.preventDefault();
@@ -66,51 +80,9 @@ export class ListOfAds extends Component {
 
 
     render() {
-        const RenderAds = () => {
-            if (this.state.isLoading == true) {
-                return (
-                    <div className="row">
-                        <div className="col-md-1"></div>
-                        <div className="col-md-10">
-                            {this.state.Ads.filter(ad => ad.name.toLowerCase().includes(this.state.title.toLowerCase())).map((item, index) => (
-                                <Ad key={index} dataParent={item} />
-                            ))}
-                        </div>
-                    </div>
-
-                )
-            } else {
-                return (
-                    <p className="text-center">Please wait while the ads are loading</p>
-                )
-            }
-        }
-
-        return (
-            <div className="row">
-                <div className="col-md-1"></div>
-                <div className="col-md-10">
-                    <label className=" mr-2">Search by title </label>
-                    <input type="text" name="title"
-                        className="col-md-6 rounded ml-1 mr-2"
-                        value={this.state.title}
-                        onChange={(e) => this.HandleValueChange(e)}>
-                    </input>
-                    <label className="ml-5 mr-2">Sort by </label>
-                    <select className="col-md-3 rounded ml-1" onChange={(e) => this.onSort(e)}>
-                        <option value="Select parametr for sort" defaultValue >Select parametr for sort </option>
-                        <option value="Name">Name</option>
-                        <option value="Price">Price</option>
-                        <option value="Date">Date</option>
-                    </select>
-                    <p className="col-md-3">{this.state.Ads.filter(ad => ad.name.toLowerCase().includes(this.state.title.toLowerCase())).length} searched results</p>
-                </div>
-
-                <div className="col-md-3"></div>
-                {RenderAds()}
-            </div>
+        return(
+          <ListOfAdsComponent onSort={this.onSort} HandleValueChange={this.HandleValueChange} state={this.state} load = {this.load}></ListOfAdsComponent>
         );
+
     }
-
-
 }

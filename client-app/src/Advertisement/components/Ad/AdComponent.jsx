@@ -29,7 +29,7 @@ function AdComponent(props) {
 
 
   return (
-      <div className="border border-primary rounded m-1 ml-4">
+      <div className="border border-primary rounded m-1 ml-4" key={props.key}>
           <div className="row">
               <span className="col-4 ml-3 mt-2"><h5>{data.name}</h5></span>
               <span className="col-6"></span>
