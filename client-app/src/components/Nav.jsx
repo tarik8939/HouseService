@@ -9,75 +9,111 @@ export class Nav extends Component {
     }
   }
   componentDidMount() {
-
   }
   render() {
-    if (this.props.loggedInStatus === "LOGGED_IN") {
-      return this.authenticatedView();
-  }
-  else if(this.props.loggedInStatus === "NOT_LOGGED_IN"){
+
+
+
+    if (this.props.loggedInStatus === "LOGGED_IN" && this.props.user.userTypeID == 1) {
+      return this.authenticatedViewForHouseOwner();
+    }
+    else if (this.props.loggedInStatus === "LOGGED_IN" && this.props.user.userTypeID == 2) {
+      return this.authenticatedViewForContractor();
+    }
+    else if (this.props.loggedInStatus === "NOT_LOGGED_IN") {
       return this.notAuthenticatedView();
+    }
   }
-  }
-  authenticatedView(){
-      return (
-        <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-           <div class="container-fluid">
-              <div class="navbar-header">
+  authenticatedViewForHouseOwner() {
+    return (
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+          <div class="navbar-header">
             <Link to="/" className="navbar-brand">Home</Link>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-            <li className="nav-item active">
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li className="nav-item active">
                 <Link to="/" className="nav-link" >All Ads</Link>
-            </li>
-            <li className="nav-item active">
+              </li>
+              <li className="nav-item active">
                 <Link className="nav-link" to="/newAd">Create New Ad</Link>
-            </li>
-            <li className="nav-item active">
+              </li>
+              <li className="nav-item active">
                 <Link className="nav-link" to="/myAds">My Ads</Link>
-            </li>
+              </li>
             </ul>
             <ul class="nav navbar-nav ml-auto">
-            <li className="nav-item active">
+              <li className="nav-item active">
                 <a className="nav-link">Hello {this.props.user.fullName}</a>
               </li>
               <li className="nav-item active">
-                <Link  className="nav-link" to="/logout">Logout</Link>
+                <Link className="nav-link" to="/logout">Logout</Link>
               </li>
             </ul>
           </div>
-          </div>
-        </nav>
-        
-      );
-    }
-notAuthenticatedView(){
-      return (
-        <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-           <div class="container-fluid">
-              <div class="navbar-header">
+        </div>
+      </nav>
+
+    );
+  }
+
+  authenticatedViewForContractor() {
+    return (
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+          <div class="navbar-header">
             <Link to="/" className="navbar-brand">Home</Link>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-            <li className="nav-item active">
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li className="nav-item active">
                 <Link to="/" className="nav-link" >All Ads</Link>
-            </li>
-            </ul>
-            <ul class="nav navbar-nav ml-auto">
-            <li className="nav-item active">
-            <Link  className="nav-link" to="/login">Login</Link>
               </li>
               <li className="nav-item active">
-                <Link  className="nav-link" to="/register">Register</Link>
+                <Link className="nav-link" to="/AllReq">My Requests</Link>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav ml-auto">
+              <li className="nav-item active">
+                <a className="nav-link">Hello {this.props.user.fullName}</a>
+              </li>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/logout">Logout</Link>
               </li>
             </ul>
           </div>
+        </div>
+      </nav>
+
+    );
+  }
+  notAuthenticatedView() {
+    return (
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <Link to="/" className="navbar-brand">Home</Link>
           </div>
-        </nav>
-      );
-    }
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li className="nav-item active">
+                <Link to="/" className="nav-link" >All Ads</Link>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav ml-auto">
+              <li className="nav-item active">
+                <Link className="nav-link" to="/login">Login</Link>
+              </li>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/register">Register</Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    );
+  }
 }
 
 export default Nav;
