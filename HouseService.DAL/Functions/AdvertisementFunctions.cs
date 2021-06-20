@@ -20,7 +20,7 @@ namespace HouseService.DAL.Functions
         public async Task<Advertisement> Create(Advertisement advertisement)
         {
             _context.Advertisements.Add(advertisement);
-            advertisement.AdvertisementID = await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return advertisement;
         }
 
