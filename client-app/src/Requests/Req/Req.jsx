@@ -1,0 +1,54 @@
+import React, { Component } from 'react';
+import axios from "axios";
+import  ReqComponent  from './ReqComponent';
+export default class Req extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      req: this.props.req
+    };
+    this.changeState = this.changeState.bind(this);
+    this.edit = this.edit.bind(this);
+  }
+
+  componentDidMount() {
+    const path = `https://localhost:44307/api/Request/getById/${this.state.req.requestID}`;
+    axios.get(path).then((response) => {
+      const req = response.data;
+      this.setState({ req });
+      console.log(this.state.req);
+    });
+  }
+  changeState(id) {
+    alert("Are you sure you want to delete this request?");
+    const path = `https://localhost:44307/api/Request/delete/${id}`;
+    axios.delete(path).then(response => {
+      console.log(response);
+      window.location.reload();
+    })
+
+  }
+  edit(comment) {
+    const path = `https://localhost:44307/api/Request/edit/${this.state.req.requestID}`;
+    axios.put(path, {
+      comment: comment
+    }).then((response) => {
+      const req = response.data;
+      if (req) {
+        alert("success");
+        this.setState({ req });
+        console.log(this.state.req);
+      }
+    });
+  }
+  render() {
+    return (
+      <div className="row">
+        <ReqComponent props={this.state.req}
+        changeState={this.changeState}
+        edit={this.edit}
+        />
+      </div>
+    );
+  }
+}

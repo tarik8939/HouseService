@@ -3,7 +3,7 @@ import axios from "axios";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { Prompt } from 'react-st-modal';
-import Req from "../components/Req";
+import Req from "../Req/Req";
 export class AllReq extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +18,7 @@ export class AllReq extends Component {
   }
   load(){
     const userID = this.props.user.userID;
+    // alert(`hello ${userID}`)
     const path = `https://localhost:44307/api/Request/getByUserId/${userID}`;
     axios.get(path).then((response) => {
       const Reqs = response.data
@@ -26,7 +27,6 @@ export class AllReq extends Component {
     });
   }
   changeState(id) {
-    alert(id)
     const path = `https://localhost:44307/api/Request/delete/${id}`;
 
     axios.delete(path).then(response => {
@@ -34,8 +34,8 @@ export class AllReq extends Component {
       let Reqs = this.state.Reqs.filter(x => x.requestID != id)
       this.setState({ Reqs });
     })
-
   }
+
 
   render() {
     return (
