@@ -24,8 +24,9 @@ export default class NewRequest extends Component {
     this.setState({userID, advertisementID});
     const path = `https://localhost:44307/api/Request/getForUser/${this.props.userID}&${this.props.advertisementID}`;
     axios.get(path).then(response => {
+      if(response.data!=""){
       const request = response.data;
-      this.setState({ request})
+      this.setState({ request})}
       console.log(this.state.request)
   });
   }
@@ -43,6 +44,7 @@ export default class NewRequest extends Component {
     })
       .then((response) => {
         console.log(response);
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);

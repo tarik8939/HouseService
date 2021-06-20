@@ -7,7 +7,7 @@ import {
     SingleDatePicker,
     DayPickerRangeController,
 } from "react-dates";
-import { FormErrors } from './FormErrors';
+import FormErrors  from '../components/FormErrors';
 import { Redirect } from 'react-router-dom';
 
 

@@ -107,5 +107,17 @@ namespace HouseService.BLL.Logics
             }
             return request;
         }
+
+        public async Task<Request> Edit(int id, RequestDto dto)
+        {
+            var req = await this.requests.GetById(id);
+            if (req != null)
+            {
+                req.Comment = dto.Comment;
+                var resreq = await this.requests.Edit(req);
+                return resreq;
+            }
+            return null;
+        }
     }
 }

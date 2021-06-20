@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
-import Ad from "./Ad";
+import Ad from "../components/Ad";
 
-import '../App.css';
+import '../../App.css';
 
 export class MyAds extends Component {
     static displayName = MyAds.Name;

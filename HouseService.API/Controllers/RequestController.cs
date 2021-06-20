@@ -66,5 +66,12 @@ namespace HouseService.API.Controllers
             var req = await _logic.ChangeState(stateId, id);
             return req;
         }
+
+        [HttpPut("edit/{id}")]
+        public async Task<Request> PutRequest(int id, RequestDto request)
+        {
+            var req = await _logic.Edit(id, request);
+            return req;
+        }
     }
 }

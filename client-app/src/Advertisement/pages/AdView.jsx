@@ -3,8 +3,8 @@ import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import moment from "moment";
 import { Redirect } from 'react-router-dom';
-import ReqForAd  from "./ReqForAd";
-import NewRequest from "./NewRequest";
+import ReqForAd  from "../../Requests/components/ReqForAd";
+import NewRequest from "../../Requests/components/NewRequest";
 export class AdView extends Component {
     constructor(props) {
         super(props)

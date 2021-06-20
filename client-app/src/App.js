@@ -2,19 +2,17 @@ import logo from './logo.svg';
 import './App.css';
 import { Container } from 'reactstrap';
 import React, { Component } from "react";
-import { Login } from "./components/Login";
-import { Register } from "./components/Register";
-import { Nav } from "./components/Nav";
-import { Home } from "./components/Home"
-import { NewAd } from "./Advertisement/NewAd"
-import { BrowserRouter, Route } from "react-router-dom"
+import { BrowserRouter, Route } from "react-router-dom";
 import { Layout } from './components/Layout';
-import { Logout } from './components/Logout';
-import { ListOfAds } from './Advertisement/ListOfAds';
-import { EditAd } from './Advertisement/EditAd';
-import { AdView } from './Advertisement/AdView';
-import { MyAds } from './Advertisement/MyAds';
-import { AllReq } from './Advertisement/AllReq';
+import { Login } from "./Authorization/pages/Login";
+import { Register } from "./Authorization/pages/Register";
+import { Logout } from './Authorization/pages/Logout';
+import { NewAd } from "./Advertisement/pages/NewAd"
+import { ListOfAds } from './Advertisement/pages/ListOfAds';
+import { EditAd } from './Advertisement/pages/EditAd';
+import { AdView } from './Advertisement/pages/AdView';
+import { MyAds } from './Advertisement/pages/MyAds';
+import { AllReq } from './Requests/pages/AllReq';
 
 
 export class App extends Component {
@@ -76,15 +74,15 @@ export class App extends Component {
     return (
       <BrowserRouter>
         <Layout loggedInStatus={this.state.loggedInStatus} user={this.state.user}>
-          <Route path={"/"} exact render={(props) => (<ListOfAds{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user} />)} />
-          <Route path="/login" exact render={(props) => (<Login{...props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />)} />
-          <Route path="/logout" exact render={(props) => (<Logout{...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />)} />
-          <Route path="/register" render={(props) => (<Register{...props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />)} />
-          <Route path="/newAd" render={(props) => (<NewAd{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user} />)} />
-          <Route path="/adView/:id" render={(props) => (<AdView{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user} />)} />
-          <Route path="/editAd/:id" render={(props) => (<EditAd{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user} />)} />
-          <Route path="/myAds" render={(props) => (<MyAds{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user} />)} />
-          <Route path="/AllReq" render={(props) => (<AllReq{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user} />)} />
+          <Route path={"/"} exact render={(props) => (<ListOfAds{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
+          <Route path="/login" exact render={(props) => (<Login{...props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus}/>)}/>
+          <Route path="/logout" exact render={(props) => (<Logout{...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus}/>)}/>
+          <Route path="/register" render={(props) => (<Register{...props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus}/>)}/>
+          <Route path="/newAd" render={(props) => (<NewAd{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
+          <Route path="/adView/:id" render={(props) => (<AdView{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
+          <Route path="/editAd/:id" render={(props) => (<EditAd{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
+          <Route path="/myAds" render={(props) => (<MyAds{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
+          <Route path="/AllReq" render={(props) => (<AllReq{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
         
         </Layout>
       </BrowserRouter>
