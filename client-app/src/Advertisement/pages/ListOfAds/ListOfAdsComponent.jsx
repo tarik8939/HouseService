@@ -8,8 +8,8 @@ function ListOfAdsComponent(props) {
         <div className="row">
           <div className="col-md-1"></div>
           <div className="col-md-10">
-            {props.state.Ads.filter(ad => ad.name.toLowerCase().includes(props.state.title.toLowerCase())).map((item, index) => (
-              <Ad key={index} dataParent={item} load={props.load}/>
+            {props.state.Ads.filter(ad => ad.name.toLowerCase().includes(props.state.title.toLowerCase())).map((item) => (
+              <Ad key={item.advertisementID} dataParent={item} load={props.load}/>
             ))}
           </div>
         </div>

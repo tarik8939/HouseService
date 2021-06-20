@@ -7,7 +7,6 @@ export default class Req extends Component {
     this.state = {
       req: this.props.req
     };
-    this.changeState = this.changeState.bind(this);
     this.edit = this.edit.bind(this);
   }
 
@@ -18,15 +17,6 @@ export default class Req extends Component {
       this.setState({ req });
       console.log(this.state.req);
     });
-  }
-  changeState(id) {
-    alert("Are you sure you want to delete this request?");
-    const path = `https://localhost:44307/api/Request/delete/${id}`;
-    axios.delete(path).then(response => {
-      console.log(response);
-      window.location.reload();
-    })
-
   }
   edit(comment) {
     const path = `https://localhost:44307/api/Request/edit/${this.state.req.requestID}`;
@@ -44,8 +34,9 @@ export default class Req extends Component {
   render() {
     return (
       <div className="row">
-        <ReqComponent props={this.state.req}
-        changeState={this.changeState}
+        <ReqComponent key={this.props.key}
+        req={this.state.req}
+        changeState={this.props.changeState}
         edit={this.edit}
         />
       </div>

@@ -10,28 +10,31 @@ function ReqComponent(props) {
                     <div className="row">
                         <span className="col-md-4">
                             Advertisement:
-                            <Link to={`/AdView/${props.props.advertisement.advertisementID}`}>
-                                {props.props.advertisement.name}
+                            <Link to={`/AdView/${props.req.advertisement.advertisementID}`}>
+                                {props.req.advertisement.name}
                             </Link>
                         </span>
+                        <span className="col-md-4">
+                        <p>Comment: {props.req.comment}</p>
+                      </span>
                     </div>
 
                     <div className="row">
                         <span className="col-md-3">
-                            Status: {props.props.state.stateName}
+                            Status: {props.req.state.stateName}
                         </span>
                     </div>
                     <div className="row">
-                        <span className="col-2 mb-2 ">From: {moment(props.props.advertisement.startDate).format('L')}</span>
-                        <span className="col-2 ml-3 mb-2 ">Until: {moment(props.props.advertisement.endDate).format('L')}</span>
-                        <span className="col-2 ml-3 mb-2 ">Price: {props.props.advertisement.price} $</span>
+                        <span className="col-2 mb-2 ">From: {moment(props.req.advertisement.startDate).format('L')}</span>
+                        <span className="col-2 ml-3 mb-2 ">Until: {moment(props.req.advertisement.endDate).format('L')}</span>
+                        <span className="col-2 ml-3 mb-2 ">Price: {props.req.advertisement.price} $</span>
                     </div>
 
                 </div>
                 <div className="row col-md-12 m-1">
-                    <button type="button" className="btn btn-outline-danger col-md-2" onClick={(e) => this.changeState(props.props.requestID, e)}>Delete</button>
+                    <button type="button" className="btn btn-outline-danger col-md-2" onClick={(e) => props.changeState(props.req.requestID, e)}>Delete</button>
                     <button type="button" className="btn btn-outline-warning col-md-2 ml-2" onClick={async () => {
-                        const result = await Prompt('Change your message', { defaultValue: props.props.comment });
+                        const result = await Prompt('Change your message', { defaultValue: props.req.comment });
 
                         if (result) {
                             props.edit(result);

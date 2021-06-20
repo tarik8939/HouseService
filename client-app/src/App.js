@@ -8,10 +8,9 @@ import { Login } from "./Authorization/pages/Login";
 import { Register } from "./Authorization/pages/Register";
 import { Logout } from './Authorization/pages/Logout';
 import { NewAd } from "./Advertisement/NewAd/NewAd"
-import { ListOfAds } from './Advertisement/pages/ListOfAds';
-import { EditAd } from './Advertisement/pages/EditAd';
-import { AdView } from './Advertisement/pages/AdView';
-import { MyAds } from './Advertisement/pages/MyAds';
+import { ListOfAds } from './Advertisement/pages/ListOfAds/ListOfAds';
+import { EditAd } from './Advertisement/pages/EditAd/EditAd';
+import { AdView } from './Advertisement/pages/AdView/AdView';
 import { AllReq } from './Requests/pages/AllReq';
 
 export class App extends Component {

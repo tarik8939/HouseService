@@ -3,7 +3,7 @@ import axios from "axios";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { Prompt } from 'react-st-modal';
-import Req from "../Req/Req";
+import Req from "../components/Req/Req";
 export class AllReq extends Component {
   constructor(props) {
     super(props);
@@ -11,6 +11,7 @@ export class AllReq extends Component {
       Reqs: [],
     }
     this.load=this.load.bind(this);
+    this.changeState=this.changeState.bind(this);
   }
 
   componentDidMount() {
@@ -18,7 +19,6 @@ export class AllReq extends Component {
   }
   load(){
     const userID = this.props.user.userID;
-    // alert(`hello ${userID}`)
     const path = `https://localhost:44307/api/Request/getByUserId/${userID}`;
     axios.get(path).then((response) => {
       const Reqs = response.data
@@ -27,28 +27,33 @@ export class AllReq extends Component {
     });
   }
   changeState(id) {
+    alert("Are you sure you want to delete this request?");
     const path = `https://localhost:44307/api/Request/delete/${id}`;
 
     axios.delete(path).then(response => {
       console.log(response)
       let Reqs = this.state.Reqs.filter(x => x.requestID != id)
       this.setState({ Reqs });
+      this.load();
     })
   }
 
 
   render() {
+    if(this.state.Reqs)
     return (
       <div className="row">
         <div className="col-md-1"></div>
         <div className="col-md-10">
           <h1 className="text-center">My requests</h1>
-          {this.state.Reqs.map((item, index) => (
-             <Req key={index} req={item} load={this.load} />
+          {this.state.Reqs.map((item) => (
+             <Req key={item.requestID} req={item} load={this.load} changeState={this.changeState} />
           ))}
-
         </div>
       </div>
     )
+    else{
+      return(<h1>loading</h1>)
+    }
   }
 }
