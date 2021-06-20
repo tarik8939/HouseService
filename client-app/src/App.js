@@ -7,7 +7,7 @@ import { Layout } from './components/Layout';
 import { Login } from "./Authorization/pages/Login";
 import { Register } from "./Authorization/pages/Register";
 import { Logout } from './Authorization/pages/Logout';
-import { NewAd } from "./Advertisement/pages/NewAd"
+import { NewAd } from "./Advertisement/NewAd/NewAd"
 import { ListOfAds } from './Advertisement/pages/ListOfAds';
 import { EditAd } from './Advertisement/pages/EditAd';
 import { AdView } from './Advertisement/pages/AdView';
