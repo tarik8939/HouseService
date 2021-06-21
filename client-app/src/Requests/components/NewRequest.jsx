@@ -57,30 +57,32 @@ export default class NewRequest extends Component {
       return (
         <div>
             <h3>Your request status: {this.state.request.state.stateName}</h3>
+            <p>Your comment: {this.state.request.comment}</p>
         </div>
   
       );
     }
-    else{
-    return (
-      <div>
-        <form onSubmit={this.Submit}>
-          <h2>Send request</h2>
-          <label className="col-md-8">
-            Message for house owner:
+    else {
+      return (
+        <div className="row">
+          <form onSubmit={this.Submit}>
+            <h2>Send request</h2>
+            <label>
+              Message for house owner:
+            </label>
             <input
-              type="text"
-              required className="form-control"
-              name="comment"
-              value={this.state.comment}
-              onChange={this.handleInputChange}
-            />
-          </label>
-          <input type="submit" value="Send" className="btn col-md-8 btn-primary text-center" />
-        </form>
-      </div>
+                type="text"
+                required className="form-control mb-3"
+                name="comment"
+                value={this.state.comment}
+                onChange={this.handleInputChange}
+              />
 
-    );
+            <input type="submit" value="Send" className="btn col-md-12 btn-primary text-center" />
+          </form>
+        </div>
+
+      );
     }
   }
 }
