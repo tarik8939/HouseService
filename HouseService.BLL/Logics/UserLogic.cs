@@ -27,15 +27,17 @@ namespace HouseService.BLL.Logics
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
                 UserTypeID = dto.UserTypeID
             };
-            var result = await this.users.Create(user);
-            if (result.UserID > 0)
+            var check = this.users.GetByEmail(dto.Email);
+            if (check==null)
             {
-                return result;
+                await this.users.Create(user);
+                var result = await this.GetByEmail(dto.Email);
+                if (result != null)
+                {
+                    return result;
+                }
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         public async Task<User> GetByEmail(string email)

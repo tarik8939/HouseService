@@ -7,7 +7,7 @@ import { Layout } from './components/Layout';
 import { Login } from "./Authorization/pages/Login";
 import { Register } from "./Authorization/pages/Register";
 import { Logout } from './Authorization/pages/Logout';
-import { NewAd } from "./Advertisement/NewAd/NewAd"
+import { NewAd } from "./Advertisement/pages/NewAd/NewAd"
 import { ListOfAds } from './Advertisement/pages/ListOfAds/ListOfAds';
 import { EditAd } from './Advertisement/pages/EditAd/EditAd';
 import { AdView } from './Advertisement/pages/AdView/AdView';
@@ -39,7 +39,7 @@ export class App extends Component {
           });
         } else if (
           !response.userID &&
-          (this.state.loggedInStatus === "LOGGED_IN")
+          this.state.loggedInStatus === "LOGGED_IN"
         ) {
           this.setState({
             loggedInStatus: "NOT_LOGGED_IN",

@@ -31,13 +31,20 @@ export class Login extends Component {
         credentials: 'include',
         body: JSON.stringify(this.state), 
       }).then(response =>response.json()).then(response => {
+        if(response.userID){
         console.log(response);
         this.props.handleLogin(response);
+        this.setState({redirect:true});
+        this.render();
+        }
+        else{
+          alert("there was a problem logging in");
+          window.location.reload();
+        }
       }).catch((error) => {
         console.log(error);
       });
-      this.setState({redirect:true});
-      this.render();
+
   }
   render() {
     if (this.state.redirect)

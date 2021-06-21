@@ -1,12 +1,9 @@
 ﻿using HouseService.BLL.DTOs;
 using HouseService.BLL.Helpers;
 using HouseService.BLL.Logics;
-using HouseService.DAL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HouseService.API.Controllers
@@ -26,7 +23,12 @@ namespace HouseService.API.Controllers
         public async Task<IActionResult> Register(RegisterDto dto)
         {
             var user = await _logic.Register(dto);
-            return Created("success", user);
+            if (user != null)
+            {
+                return Created("success", user);
+            }
+            else
+                return BadRequest(new { message = "There was a problem registering" });
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto dto)

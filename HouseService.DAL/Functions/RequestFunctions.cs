@@ -20,7 +20,7 @@ namespace HouseService.DAL.Functions
         public async Task<Request> Create(Request request)
         {
             _context.Requests.Add(request);
-            request.RequestID = await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return request;
         }
 

@@ -34,12 +34,19 @@ export class Register extends Component {
         body: JSON.stringify(this.state), 
       }).then(response =>response.json()).then(response => {
         console.log(response);
-        this.props.handleLogin(response);
+        if(response.userID){
+          console.log(response);
+          this.props.handleLogin(response);
+          this.setState({redirect:true});
+          this.render();
+          }
+        else{
+          alert("there was a problem registering");
+          window.location.reload();
+        }
       }).catch((error) => {
         console.log(error);
       });
-      this.setState({redirect:true});
-      this.render();
   }
 
 

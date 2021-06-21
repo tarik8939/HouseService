@@ -21,7 +21,7 @@ namespace HouseService.DAL.Functions
         public async Task<User> Create(User user)
         {
             _context.Users.Add(user);
-            user.UserID = await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return user;
         }
 

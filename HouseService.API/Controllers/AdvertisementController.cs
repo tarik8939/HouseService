@@ -19,53 +19,82 @@ namespace HouseService.API.Controllers
         }
 
         [HttpGet("getAll")]
-        public async Task<ICollection<Advertisement>> GetAdvertisement()
+        public async Task<IActionResult> GetAdvertisement()
         {
             var adlist = await _logic.GetAll();
-            return adlist;
+            if (adlist != null)
+            {
+                return Ok(adlist);
+            }
+            return BadRequest(new { message = "Can't find ads" });
         }
 
         [HttpGet("getById/{id}")]
-        public async Task<Advertisement> GetAdvertisementById(int id)
+        public async Task<IActionResult> GetAdvertisementById(int id)
         {
-            var adlist = await _logic.GetById(id);
-            return adlist;
+            var ad = await _logic.GetById(id);
+            if (ad != null)
+            {
+                return Ok(ad);
+            }
+            return BadRequest(new { message = "Can't find ad" });
         }
 
         [HttpGet("getByUserId/{id}")]
-        public async Task<List<Advertisement>> GetAdvertisementByUserId(int id)
+        public async Task<IActionResult> GetAdvertisementByUserId(int id)
         {
             var adlist = await _logic.GetByUser(id);
-            return adlist;
+            if (adlist != null)
+            {
+                return Ok(adlist);
+            }
+            return BadRequest(new { message = "Can't find ads for user" });
         }
 
         [HttpPut("edit/{id}")]
-        public async Task<Advertisement> PutAdvertisement(int id, AdvertisementDto advertisement)
+        public async Task<IActionResult> PutAdvertisement(int id, AdvertisementDto advertisement)
         {
             var ad = await _logic.Edit(id, advertisement);
-            return ad;
+            if (ad != null)
+            {
+                return Created("success", ad);
+            }
+            return BadRequest(new { message = "Ad wasn't edited" });
         }
 
         // [Authorize]
         [HttpPost("create")]
-        public async Task<Advertisement> PostAdvertisement(AdvertisementDto advertisement)
+        public async Task<IActionResult> PostAdvertisement(AdvertisementDto advertisement)
         {
             var ad = await _logic.Create(advertisement);
-            return ad;
+            if (ad != null)
+            {
+                return Created("success", ad);
+            }
+            return BadRequest(new { message = "Ad wasn't created" });
         }
 
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteAdvertisement(int id)
         {
             await _logic.Delete(id);
-            return NoContent();
+            var res = await _logic.GetById(id);
+            if (res==null)
+            {
+                return Ok(new { message = "Ad was deleted" });
+            }
+            return BadRequest(new { message = "Ad wasn't deleted" });
         }
 
         [HttpPut("changeStatus/{id}/{statusId}")]
-        public async Task<Advertisement> ChangeStatus(int statusId, int id)
+        public async Task<IActionResult> ChangeStatus(int statusId, int id)
         {
             var ad = await _logic.ChangeStatus(statusId, id);
-            return ad;
+            if (ad != null)
+            {
+                return Created("success", ad);
+            }
+            return BadRequest(new { message = "Ad status wasn't changed" });
         }
     }
 }
