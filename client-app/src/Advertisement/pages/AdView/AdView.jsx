@@ -7,6 +7,7 @@ export class AdView extends Component {
     this.state = {
       Ad: null
     }
+    this.workDone = this.workDone.bind(this);
   }
   componentWillMount(){
     const id = this.props.match.params.id;
@@ -16,9 +17,23 @@ export class AdView extends Component {
       this.setState({ Ad });
     });
   }
+  workDone = (item) => {
+    let statusID = 4;
+    const path = `https://localhost:44307/api/Advertisement/changeStatus/${item.advertisementID}/${statusID}`;
+    axios.put(path, {
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).then(response => {
+        console.log(response)
+        window.location.reload();
+    }).catch((error) => {
+        console.log(error)
+    })
+}
   render() {
     if(this.state.Ad){
-      return(<AdViewComponent Ad={this.state.Ad} user={this.props.user}></AdViewComponent>)
+      return(<AdViewComponent Ad={this.state.Ad} user={this.props.user} workDone={this.workDone}></AdViewComponent>)
     }
     else return(<h1>Loading...</h1>)
   }

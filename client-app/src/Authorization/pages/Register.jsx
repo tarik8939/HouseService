@@ -47,6 +47,8 @@ export class Register extends Component {
       }).catch((error) => {
         console.log(error);
       });
+      alert("there was a problem registering");
+      window.location.reload();
   }
 
 
@@ -95,7 +97,6 @@ export class Register extends Component {
                   <label className="col-md-8"> Role
                     <select name="userTypeID" className="form-control" placeholder="Choose a role"
                       onChange={this.handleInputChange} value={this.state.userTypeID} required>
-                      <option value="0">Select role</option>
                       <option value="1">House owner</option>
                       <option value="2">Contractor</option>
                     </select>
