@@ -8,7 +8,6 @@ function AdViewComponent(props) {
 
   const renderBtn = () => {
     if (props.Ad.statusID === 3) {
-      console.log("asdas")
         return (
           <input type="button" value="Work Done" className="btn col-md-12 btn-primary text-center" onClick={(e) => props.workDone(props.Ad, e)}></input>
         )
