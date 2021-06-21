@@ -7,6 +7,7 @@ import {
   SingleDatePicker,
   DayPickerRangeController
 } from "react-dates";
+import { FormErrors } from '../../components/FormErrors';
 
 function EditAdComponent(props) {
   return (
@@ -14,7 +15,11 @@ function EditAdComponent(props) {
       <div className="col-md-3"></div>
       <div className="col-md-6">
         <form>
-          <div className="form-group">
+          <h2 className="ml-3">Edit ad</h2>
+          <div className="panel panel-default ml-3">
+            <FormErrors formErrors={props.state.formErrors} />
+          </div>
+          <div className={`form-group ${props.errorClass(props.state.formErrors.name)}`}>
             <label className="col-md-8">
               Name:
               <input name="name" className="form-control"
@@ -23,7 +28,7 @@ function EditAdComponent(props) {
               />
             </label>
           </div>
-          <div className="form-group">
+          <div className={`form-group ${props.errorClass(props.state.formErrors.description)}`}>
             <label className="col-md-8">
               Description:
               <input name="description" className="form-control"
@@ -58,7 +63,7 @@ function EditAdComponent(props) {
               />
             </label>
           </div>
-          <div className="form-group">
+          <div className={`form-group ${props.errorClass(props.state.formErrors.price)}`}>
             <label className="col-md-8">
               Price:
               <input name="price" className="form-control"

@@ -6,9 +6,9 @@ export default class NewRequest extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userID : null,
+      userID: null,
       advertisementID: null,
-      comment : "",
+      comment: "",
       request: null
     };
     this.Submit = this.Submit.bind(this);
@@ -21,14 +21,15 @@ export default class NewRequest extends Component {
   componentDidMount() {
     const userID = this.props.userID;
     const advertisementID = this.props.advertisementID;
-    this.setState({userID, advertisementID});
+    this.setState({ userID, advertisementID });
     const path = `https://localhost:44307/api/Request/getForUser/${this.props.userID}&${this.props.advertisementID}`;
     axios.get(path).then(response => {
-      if(response.data!=""){
-      const request = response.data;
-      this.setState({ request})}
+      if (response.data != "") {
+        const request = response.data;
+        this.setState({ request })
+      }
       console.log(this.state.request)
-  });
+    });
   }
   Submit(event) {
     event.preventDefault();
@@ -53,34 +54,35 @@ export default class NewRequest extends Component {
   }
 
   render() {
-    if(this.state.request!=null){
+    if (this.state.request != null) {
       return (
         <div>
-            <h3>Your request status: {this.state.request.state.stateName}</h3>
+          <h3>Your request status: {this.state.request.state.stateName}</h3>
+          <p>Your comment: {this.state.request.comment}</p>
         </div>
-  
+
       );
     }
-    else{
-    return (
-      <div>
-        <form onSubmit={this.Submit}>
-          <h2>Send request</h2>
-          <label className="col-md-8">
-            Message for house owner:
-            <input
-              type="text"
-              required className="form-control"
-              name="comment"
-              value={this.state.comment}
-              onChange={this.handleInputChange}
-            />
-          </label>
-          <input type="submit" value="Send" className="btn col-md-8 btn-primary text-center" />
-        </form>
-      </div>
+    else {
+      return (
+        <div className="row">
+          <form onSubmit={this.Submit}>
+            <h2>Send request</h2>
+            <label className="col-md-8">
+              Message for house owner:
+              <input
+                type="text"
+                required className="form-control mb-3"
+                name="comment"
+                value={this.state.comment}
+                onChange={this.handleInputChange}
+              />
+            </label>
+            <input type="submit" value="Send" className="btn col-md-12 btn-primary text-center" />
+          </form>
+        </div>
 
-    );
+      );
     }
   }
 }

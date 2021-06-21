@@ -4,6 +4,7 @@ import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import { Redirect } from 'react-router-dom';
 import NewAdComponent from './NewAdComponent'
+import { FormErrors } from '../../components/FormErrors';
 
 
 
@@ -20,7 +21,7 @@ export class NewAd extends Component {
             Price: "",
             isAuthenticated: false,
             userID: "",
-            formErrors: { Name: '', Price: '' },
+            formErrors: { Name: '', Price: '', Description: '' },
             NameValid: false,
             PriceValid: false,
             formValid: false,
@@ -82,6 +83,10 @@ export class NewAd extends Component {
                 NameValid = value.length <= 30 && value.length >= 5;
                 fieldValidationErrors.Name = NameValid ? '' : ' is invalid';
                 break;
+            case 'Description':
+                NameValid = value.length <= 500 && value.length >= 10;
+                fieldValidationErrors.Description = NameValid ? '' : ' is invalid';
+                break;
             case 'Price':
                 PriceValid = value.length >= 0 && value.match(/^\d+(?:\.\d\d)*$/g);
                 fieldValidationErrors.Price = PriceValid ? '' : ' is invalid';
@@ -108,7 +113,7 @@ export class NewAd extends Component {
         }
         if (this.state.isAuthenticated) {
             return (
-                <NewAdComponent data={this.state}
+                <NewAdComponent state={this.state}
                     validateForm={this.validateForm}
                     validateField={this.validateField}
                     Submit={this.Submit}
