@@ -13,6 +13,7 @@ namespace HouseService.BLL.Logics
     public class RequestLogic
     {
         private IRequest requests = new RequestFunctions();
+        private IAdvertisement advertisement = new AdvertisementFunctions();
 
 
         public async Task<Request> Create(RequestDto dto)
@@ -45,6 +46,9 @@ namespace HouseService.BLL.Logics
                 if (stateId == 3)
                 {
                     var requests = await this.requests.GetByAdvertisement(request.AdvertisementID);
+                    var ad = await this.advertisement.GetById(request.AdvertisementID);
+                    ad.StatusID = 3;
+                    await this.advertisement.Edit(ad);
                     foreach (var var in requests)
                     {
                         if (var.RequestID != resad.RequestID)

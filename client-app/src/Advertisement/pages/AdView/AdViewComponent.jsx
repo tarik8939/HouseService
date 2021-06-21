@@ -6,17 +6,18 @@ import NewRequest from "../../../Requests/components/NewRequest";
 
 function AdViewComponent(props) {
 const renderBtn = () => {
-    if (props.Ad.status === 3) {
+    if (props.Ad.statusID === 3) {
+      console.log("asdas")
         return (
           <input type="button" value="Work Done" className="btn col-md-12 btn-primary text-center" onClick={(e) => props.workDone(props.Ad, e)}></input>
         )
     }
-    else if (props.Ad.status === 2 || props.Ad.status === 1) {
+    else if (props.Ad.statusID === 2 || props.Ad.statusID === 1) {
       return (
         <Link type="button" value="Edit" className="btn col-md-12 btn-primary text-center" to={`/editAd/${props.Ad.advertisementID}`}> Edit</Link>
       )
   }
-  else if (props.Ad.status === 4 ) {
+  else if (props.Ad.statusID === 4 ) {
     return (
       <h1>Work done!</h1>
     )
