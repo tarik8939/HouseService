@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from "axios";
+import ReactStars from 'react-stars'
 
 export default class ReqForAd extends Component {
 
@@ -42,12 +43,16 @@ export default class ReqForAd extends Component {
         <button type="button" className="btn btn-outline-danger col-md-2" onClick={(e) => this.changeState(2, e)}>Decline</button>
       </div>);
     }
+    const rating = () => data.user.markCount>0 
+    ? <p>Rating: {data.user.rating} ({data.user.markCount})</p> 
+    : null
     return (
       <div className="row">
         <div className="border border-primary rounded m-1 ml-4">
           <div className="row col-md-12">
             <span className="col-md-4">
               <p>Contractor: {data.user.fullName}</p>
+              {rating()}
             </span>
             <span className="col-md-4">
               <p>Comment: {data.comment}</p>
