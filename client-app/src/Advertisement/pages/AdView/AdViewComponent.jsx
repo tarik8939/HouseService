@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import ReqForAd from "../../../Requests/components/ReqForAd";
 import NewRequest from "../../../Requests/components/NewRequest";
+import ReactStars from 'react-stars'
 
 function AdViewComponent(props) {
   const renderBtn = () => {
@@ -21,8 +22,12 @@ function AdViewComponent(props) {
     return (
       <div>
         <h1>Work done!</h1>
-        <input type="text" name="test"></input>
-        <input type="button" onClick={props.rating(test.value)}></input>
+        <ReactStars
+  count={5}
+  onChange={props.rating}
+  size={24}
+  color2={'#ffd700'}
+  half={false} />
       </div>
     )
 }

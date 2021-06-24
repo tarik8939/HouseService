@@ -58,8 +58,6 @@ export class Register extends Component {
     }).catch((error) => {
       console.log(error);
     });
-    alert("there was a problem registering");
-    window.location.reload();
   }
 
   validateField(fieldName, value) {

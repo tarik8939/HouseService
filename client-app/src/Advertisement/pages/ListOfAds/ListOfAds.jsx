@@ -31,6 +31,7 @@ export class ListOfAds extends Component {
             console.log(response)
         });
       }
+    else{
       const path = `https://localhost:44307/api/Advertisement/getAll`;
       axios.get(path).then((response) => {
           const Ads = response.data.filter(x => x.statusID == 1);
@@ -39,6 +40,7 @@ export class ListOfAds extends Component {
           console.log(this.state)
           console.log(response)
       });
+      }
       
     }
     HandleValueChange(event) {

@@ -37,7 +37,7 @@ namespace HouseService.DAL.Models
         public string Password { get; set; }
         public int UserTypeID { get; set; }
         public int MarkCount { get; set; }
-        public float Rating { get; set; }
+        public double Rating { get; set; }
         public virtual ICollection<Advertisement> Advertisements { get; set; }
         public virtual ICollection<Request> Requests { get; set; }
         public virtual UserType UserType { get; set; }

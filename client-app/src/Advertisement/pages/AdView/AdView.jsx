@@ -32,8 +32,8 @@ export class AdView extends Component {
         console.log(error)
     })
 }
-rating = (mark) => {
-  const path = `https://localhost:44307/api/Advertisement/changeRating/${this.state.Ad.advertisementID}/${mark}`;
+rating = (newRating) => {
+  const path = `https://localhost:44307/api/Advertisement/changeRating/${this.state.Ad.advertisementID}/${newRating}`;
   axios.put(path, {
       headers: {
           "Content-Type": "application/json",

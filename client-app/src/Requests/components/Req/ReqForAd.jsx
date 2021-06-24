@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from "axios";
+import ReactStars from 'react-stars';
 
 export default class ReqForAd extends Component {
 
@@ -31,16 +32,16 @@ export default class ReqForAd extends Component {
   render() {
     const { data } = this.state;
     const forAccepted = () => {
-      if(data.stateID === 3)
-      return(<div ><span className="text-success ml-3">Accepted</span></div>);
+      if (data.stateID === 3)
+        return (<div ><span className="text-success ml-3">Accepted</span></div>);
     }
     const forUnAccepted = () => {
-      if(data.stateID === 1)
-      return(
-      <div className="row col-md-12 m-1">
-        <button type="button" className="btn btn-outline-success col-md-2 mr-2" onClick={(e) => this.changeState(3, e)}>Accept</button>
-        <button type="button" className="btn btn-outline-danger col-md-2" onClick={(e) => this.changeState(2, e)}>Decline</button>
-      </div>);
+      if (data.stateID === 1)
+        return (
+          <div className="row col-md-12 m-1">
+            <button type="button" className="btn btn-outline-success col-md-2 mr-2" onClick={(e) => this.changeState(3, e)}>Accept</button>
+            <button type="button" className="btn btn-outline-danger col-md-2" onClick={(e) => this.changeState(2, e)}>Decline</button>
+          </div>);
     }
     return (
       <div className="row">
@@ -50,7 +51,7 @@ export default class ReqForAd extends Component {
               <p>Contractor: {data.user.fullName}</p>
             </span>
             <span className="col-md-4">
-              <p>Comment: {data.comment}</p>
+              <p>Commenter: {data.comment}</p>
             </span>
             <span className="col-md-2">
               <p>{data.user.phoneNum}</p>

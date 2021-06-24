@@ -23,7 +23,7 @@ namespace HouseService.BLL.Logics
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Email = dto.Email,
-                PhoneNum = dto.PhoneNum,
+                PhoneNum = dto.PhoneNumber,
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
                 UserTypeID = dto.UserTypeID
             };
