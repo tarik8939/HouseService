@@ -13,6 +13,8 @@ namespace HouseService.BLL.Logics
     public class AdvertisementLogic
     {
         private IAdvertisement ads = new AdvertisementFunctions();
+        private IUser users = new UserFunctions();
+        private IRequest requests = new RequestFunctions();
 
         public async Task<ICollection<Advertisement>> GetAll()
         {
@@ -103,6 +105,43 @@ namespace HouseService.BLL.Logics
                 return null;
             }
             return ad;
+        }
+
+        public async Task<User> ChangeRating(int mark, int advertisementId)
+        {
+            var ad = await this.ads.GetById(advertisementId);
+            if (ad.StatusID != 4)
+            {
+                return null;
+            }
+            var req = await this.requests.GetByAdvertisement(advertisementId);
+            Request resreq = null;
+            foreach(var r in req)
+            {
+                if (r.StateID == 3)
+                {
+                    resreq = r;
+                }
+            }
+            if(resreq == null)
+            {
+                return null;
+            }
+            var user = await this.users.GetById((int)resreq.UserID);
+
+            var resultRating = ((user.Rating * user.MarkCount) + mark) / (user.MarkCount + 1);
+
+            user.Rating = resultRating;
+            user.MarkCount += 1;
+
+            var resuser = await this.users.Edit(user);
+
+            if (resuser != null)
+            {
+                await this.ChangeStatus(5, advertisementId);
+                return resuser;
+            }
+            return null;
         }
     }
 }

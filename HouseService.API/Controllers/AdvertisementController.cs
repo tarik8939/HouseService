@@ -96,5 +96,16 @@ namespace HouseService.API.Controllers
             }
             return BadRequest(new { message = "Ad status wasn't changed" });
         }
+
+        [HttpPut("changeRating/{advertisementId}/{userId}/{mark}")]
+        public async Task<IActionResult> ChangeRating(int advertisementId, int mark)
+        {
+            var user = await _logic.ChangeRating(mark, advertisementId);
+            if (user != null)
+            {
+                return Created("rating was applied", user);
+            }
+            return BadRequest(new { message = "rating wasn't applied" });
+        }
     }
 }

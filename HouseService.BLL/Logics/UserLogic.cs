@@ -27,7 +27,12 @@ namespace HouseService.BLL.Logics
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
                 UserTypeID = dto.UserTypeID
             };
-            var check = this.users.GetByEmail(dto.Email);
+            if (user.UserTypeID == 2)
+            {
+                user.MarkCount = 0;
+                user.Rating = 0;
+            }
+            var check = await this.users.GetByEmail(dto.Email);
             if (check==null)
             {
                 await this.users.Create(user);
@@ -63,5 +68,6 @@ namespace HouseService.BLL.Logics
 
             return user;
         }
+
     }
 }

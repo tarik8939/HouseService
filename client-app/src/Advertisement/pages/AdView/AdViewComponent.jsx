@@ -5,11 +5,40 @@ import ReqForAd from "../../../Requests/components/ReqForAd";
 import NewRequest from "../../../Requests/components/NewRequest";
 
 function AdViewComponent(props) {
+  const renderBtn = () => {
+    if (props.Ad.statusID === 3) {
+      console.log("asdas")
+        return (
+          <input type="button" value="Work Done" className="btn col-md-12 btn-primary text-center" onClick={(e) => props.workDone(props.Ad, e)}></input>
+        )
+    }
+    else if (props.Ad.statusID === 2 || props.Ad.statusID === 1) {
+      return (
+        <Link type="button" value="Edit" className="btn col-md-12 btn-primary text-center" to={`/editAd/${props.Ad.advertisementID}`}> Edit</Link>
+      )
+  }
+  else if (props.Ad.statusID === 4 ) {
+    return (
+      <div>
+        <h1>Work done!</h1>
+        <input type="text" name="test"></input>
+        <input type="button" onClick={props.rating(test.value)}></input>
+      </div>
+    )
+}
+else if (props.Ad.statusID === 5 ) {
+  return (
+    <div>
+      <h1>Thanks for your mark</h1>
+    </div>
+  )
+}
+}
   const ForHouseOwner = () => {
     if (props.Ad.userID === props.user.userID) {
       return (
         <div>
-          <Link type="button" value="Edit" className="btn col-md-12 btn-primary text-center" to={`/editAd/${props.Ad.advertisementID}`}> Edit</Link>
+          {renderBtn()}
           <div className="row justify-content-center mt-4">
             {props.Ad.requests.filter(x => x.stateID == 1 || x.stateID == 3).map((item, index) => (
               <ReqForAd key={index} dataParent={item} />

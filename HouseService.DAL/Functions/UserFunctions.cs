@@ -25,6 +25,13 @@ namespace HouseService.DAL.Functions
             return user;
         }
 
+        public async Task<User> Edit(User user)
+        {
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return user;
+        }
+
         public async Task<User> GetByEmail(string email)
         {
             var user = await _context.Users.Include(x => x.UserType)
