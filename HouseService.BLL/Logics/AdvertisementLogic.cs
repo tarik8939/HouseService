@@ -110,7 +110,7 @@ namespace HouseService.BLL.Logics
         public async Task<User> ChangeRating(int mark, int advertisementId)
         {
             var ad = await this.ads.GetById(advertisementId);
-            if (ad.StatusID != 4)
+            if (ad.StatusID != 3)
             {
                 return null;
             }
@@ -138,7 +138,7 @@ namespace HouseService.BLL.Logics
 
             if (resuser != null)
             {
-                await this.ChangeStatus(5, advertisementId);
+                await this.ChangeStatus(4, advertisementId);
                 return resuser;
             }
             return null;
