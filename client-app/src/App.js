@@ -3,6 +3,7 @@ import './App.css';
 import { Container } from 'reactstrap';
 import React, { Component } from "react";
 import {BrowserRouter, Route} from "react-router-dom";
+import { Home } from './components/Home';
 import { Layout } from './components/Layout';
 import { Login } from "./Authorization/pages/Login";
 import { Register } from "./Authorization/pages/Register";
@@ -73,7 +74,8 @@ export class App extends Component {
       
       <BrowserRouter >
         <Layout loggedInStatus={this.state.loggedInStatus} user={this.state.user}>
-          <Route path={"/"} exact render={(props) => (<ListOfAds{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
+        <Route path={"/"} exact render={(props) => (<Home{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
+          <Route path={"/listOfAds"} exact render={(props) => (<ListOfAds{...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)}/>
           <Route path="/login" exact render={(props) => (<Login{...props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus}/>)}/>
           <Route path="/logout" exact render={(props) => (<Logout{...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus}/>)}/>
           <Route path="/register" render={(props) => (<Register{...props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus}/>)}/>

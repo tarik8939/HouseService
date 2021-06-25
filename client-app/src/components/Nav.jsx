@@ -34,7 +34,7 @@ export class Nav extends Component {
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
               <li className="nav-item active">
-                <Link to="/" className="nav-link" >All Ads</Link>
+                <Link to="/listOfAds" className="nav-link" >All Ads</Link>
               </li>
               <li className="nav-item active">
                 <Link className="nav-link" to="/newAd">Create New Ad</Link>
@@ -68,7 +68,7 @@ export class Nav extends Component {
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
               <li className="nav-item active">
-                <Link to="/" className="nav-link" >All Ads</Link>
+                <Link to="/listOfAds" className="nav-link" >All Ads</Link>
               </li>
               <li className="nav-item active">
                 <Link className="nav-link" to="/AllReq">My Requests</Link>
@@ -98,7 +98,7 @@ export class Nav extends Component {
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
               <li className="nav-item active">
-                <Link to="/" className="nav-link" >All Ads</Link>
+                <Link to="/listOfAds" className="nav-link" >All Ads</Link>
               </li>
             </ul>
             <ul class="nav navbar-nav ml-auto">
