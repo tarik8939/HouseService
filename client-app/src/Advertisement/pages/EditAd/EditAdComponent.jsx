@@ -15,7 +15,7 @@ function EditAdComponent(props) {
       <div className="col-md-3"></div>
       <div className="col-md-6">
         <form>
-          <h2 className="ml-3">Edit ad</h2>
+          <h2 className="text-center" style={{ width: '60%' }}>Edit ad</h2>
           <div className="panel panel-default ml-3">
             <FormErrors formErrors={props.state.formErrors} />
           </div>
@@ -31,7 +31,7 @@ function EditAdComponent(props) {
           <div className={`form-group ${props.errorClass(props.state.formErrors.description)}`}>
             <label className="col-md-8">
               Description:
-              <input name="description" className="form-control"
+              <textarea rows="5" name="description" className="form-control"
                 type="text" value={props.state.description}
                 onChange={(e) => props.handleName(e)}
               />
@@ -72,8 +72,11 @@ function EditAdComponent(props) {
               />
             </label>
           </div>
-          <input type="submit" value="Send" onClick={(e) => props.Submit(e)}
-            className="btn col-md-8 btn-primary text-center" />
+          <div className="col-md-8">
+            <input type="submit" value="Send" onClick={(e) => props.Submit(e)}
+              className="btn col-md-12 btn-primary text-center" />
+          </div>
+
         </form>
       </div>
     </div>
