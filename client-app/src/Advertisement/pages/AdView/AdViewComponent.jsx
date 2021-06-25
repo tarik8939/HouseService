@@ -15,7 +15,15 @@ function AdViewComponent(props) {
     }
     else if (props.Ad.statusID === 2 || props.Ad.statusID === 1) {
       return (
-        <Link type="button" value="Edit" className="btn col-md-12 btn-primary text-center" to={`/editAd/${props.Ad.advertisementID}`}> Edit</Link>
+        <Link type="button" value="Edit" className="btn col-md-12 btn-primary text-light text-center" to={`/editAd/${props.state.Ad.advertisementID}`}> Edit</Link>
+      )
+    }
+    else if (props.state.Ad.statusID === 4) {
+      return (
+        <div>
+          <h1>Work done!</h1>
+          <h1>Thanks for your mark</h1>
+        </div>
       )
   }
   else if (props.Ad.statusID === 4 ) {
