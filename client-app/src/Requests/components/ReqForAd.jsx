@@ -39,8 +39,8 @@ export default class ReqForAd extends Component {
       if(data.stateID === 1)
       return(
       <div className="row col-md-12 m-1">
-        <button type="button" className="btn btn-outline-success col-md-2 mr-2" onClick={(e) => this.changeState(3, e)}>Accept</button>
-        <button type="button" className="btn btn-outline-danger col-md-2" onClick={(e) => this.changeState(2, e)}>Decline</button>
+        <button type="button" className="btn btn-success text-light col-md-2 mr-2" onClick={(e) => this.changeState(3, e)}>Accept</button>
+        <button type="button" className="btn btn-danger text-light col-md-2" onClick={(e) => this.changeState(2, e)}>Decline</button>
       </div>);
     }
     const rating = () => data.user.markCount>0 

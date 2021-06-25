@@ -7,8 +7,8 @@ function ReqComponent(props) {
         if (props.req.stateID !== 3) {
             return (
               <div className="row col-md-12 m-1">
-                        <button type="button" className="btn btn-outline-danger col-md-2" onClick={(e) => props.changeState(props.req.requestID, e)}>Delete</button>
-                        <button type="button" className="btn btn-outline-warning col-md-2 ml-2" onClick={async () => {
+                        <button type="button" className="btn btn-danger text-light col-md-2" onClick={(e) => props.changeState(props.req.requestID, e)}>Delete</button>
+                        <button type="button" className="btn btn-warning text-light col-md-2 ml-2" onClick={async () => {
                             const result = await Prompt('Change your message', { defaultValue: props.req.comment });
     
                             if (result) {
