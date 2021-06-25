@@ -13,14 +13,14 @@ export class Home extends Component {
   render() {
     return (
       <div >
-        <h2>HouseService this is a place where everyone can place ads for home care or find a well-paid job</h2>
-        <p className="lead">Types of work posted on the site:</p>
+        <h2>House Service is a place for upgrading your house or finding a well-paid job</h2>
+        <p className="lead">Types of work that available on our site:</p>
         <ul>
           <li className="lead">Repairs</li>
-          <li className="lead">Work with plumbing</li>
+          <li className="lead">Plumbing</li>
+          <li className="lead">Renovation</li>
           <li className="lead">Construction works</li>
-          <li className="lead">High-altitude works</li>
-          <li className="lead">Yard care work</li>
+          <li className="lead">Yard care works</li>
         </ul>
 
       </div>

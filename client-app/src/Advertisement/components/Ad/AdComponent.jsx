@@ -1,7 +1,6 @@
 import React from "react"
 import moment from "moment";
 import { Link } from "react-router-dom";
-import { Text } from "reactstrap";
 import LinesEllipsis from 'react-lines-ellipsis'
 
 function AdComponent(props) {
@@ -24,16 +23,16 @@ function AdComponent(props) {
   const renderStatus = (item) => {
     if (item.status != null) {
       return (
-        <p className="col-11 ml-3 ">Status: {data.status.statusName}</p>
+        <p className="col-12 fs-5">Status: {data.status.statusName}</p>
       )
     }
   }
 
 
   return (
-    <div className="border border-primary rounded m-1 ml-4" key={props.key}>
-      <div className="row">
-        <span className="col-8 ml-3 mt-2"><LinesEllipsis
+    <div className="border border-primary rounded m-1 ml-4 container" key={props.key}>
+      <div className="row mt-2">
+        <span className="col-8"><LinesEllipsis
           text={data.name}
           maxLine='1'
           ellipsis='...'
@@ -41,24 +40,25 @@ function AdComponent(props) {
           className="h3"
         /></span>
         <span className="col-2"></span>
-        <span className="text-success fs-2 mt-1 col-1 ml-5 ">{data.price}$</span>
+        <span className="text-success fs-2 col-1  ml-5">{data.price}$</span>
       </div>
-      <div className="row">
+      <div className="row mt-1 mb-2">
         <LinesEllipsis
           text={data.description}
           maxLine='2'
           ellipsis='...'
           basedOn='words'
-          className="col-10 ml-3 mt-1 mb-2"
+          className="col-10"
         />
-        {renderStatus(data)}
       </div>
-      <div className="row">
-        <span className="text-primary col-2 ml-3 mb-2 ">{data.user.fullName}</span>
-        <span className="col-2 ml-3 mb-2 ">From: {moment(data.startDate).format('L')}</span>
-        <span className="col-2 ml-3 mb-2 ">Until: {moment(data.endDate).format('L')}</span>
-        <span className="col-3"></span>
-        <span className="col-2 mb-2 ">
+      <div className="row mt-1 mb-1">
+        <span className="text-primary col-2  mt-1 ">{data.user.fullName}</span>
+        <span className="col-2 mt-1">From: {moment(data.startDate).format('L')}</span>
+        <span className="col-2  mt-1">Until: {moment(data.endDate).format('L')}</span>
+        <span className="col-3">
+          {renderStatus(data)}
+        </span>
+        <span className="col-3">
           <div className="row">
             <div className="col-6">
               {renderBtn(data)}
