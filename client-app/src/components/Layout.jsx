@@ -8,7 +8,7 @@ export class Layout extends Component {
         return (
             <div>
                 <Nav loggedInStatus={this.props.loggedInStatus} user={this.props.user} />
-                <Container>
+                <Container className="mb-5 pb-5">
                     {this.props.children}
                 </Container>
                 <Footer></Footer>

@@ -20,6 +20,7 @@ function AdViewComponent(props) {
             fillColor='orange'
             emptyColor='gray'
           />
+
           <input type="button" value="Work Done" className="btn col-md-12 btn-primary text-center mt-2" onClick={(e) => props.workDone(props.state.Ad, e)}></input>
         </div>
       )
