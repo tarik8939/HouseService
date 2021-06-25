@@ -67,17 +67,18 @@ export default class NewRequest extends Component {
       return (
         <div className="row">
           <form onSubmit={this.Submit}>
-            <h2>Send request</h2>
-            <label className="col-md-8">
+            <h2 className="text-center">Send request</h2>
+            {/* <label className="col-md-8 mr-4">
               Message for house owner:
-              <input
-                type="text"
-                required className="form-control mb-3"
-                name="comment"
-                value={this.state.comment}
-                onChange={this.handleInputChange}
-              />
-            </label>
+            </label> */}
+            <p>Message for house owner:</p>
+            <input
+              type="text"
+              required className="form-control mb-3"
+              name="comment"
+              value={this.state.comment}
+              onChange={this.handleInputChange}
+            />
             <input type="submit" value="Send" className="btn col-md-12 btn-primary text-center" />
           </form>
         </div>
