@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from 'axios';
+import logo from "../logo.png"
 export class Nav extends Component {
   constructor(props) {
     super(props);
@@ -26,10 +27,17 @@ export class Nav extends Component {
   }
   authenticatedViewForHouseOwner() {
     return (
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <Link to="/" className="navbar-brand">Home</Link>
+      <nav className="navbar navbar-expand-md navbar-light bg-light border-bottom border-grey mb-5">
+        <div className="container-fluid">
+          <div className="navbar-brand">
+            <img
+              alt=""
+              src={logo}
+              width="30"
+              height="30"
+              className="d-inline-block mr-2"
+            />
+            <Link to="/" className="navbar-brand">House service</Link>
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -45,7 +53,7 @@ export class Nav extends Component {
             </ul>
             <ul class="nav navbar-nav ml-auto">
               <li className="nav-item active">
-                <a className="nav-link">Hello {this.props.user.fullName}</a>
+                <a className="nav-link">Hello, {this.props.user.fullName}!</a>
               </li>
               <li className="nav-item active">
                 <Link className="nav-link" to="/logout">Logout</Link>
@@ -60,10 +68,17 @@ export class Nav extends Component {
 
   authenticatedViewForContractor() {
     return (
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <Link to="/" className="navbar-brand">Home</Link>
+      <nav className="navbar navbar-expand-md navbar-light bg-light border-bottom border-grey mb-5">
+        <div className="container-fluid">
+          <div className="navbar-brand">
+            <img
+              alt=""
+              src={logo}
+              width="30"
+              height="30"
+              className="d-inline-block mr-2"
+            />
+            <Link to="/" className="navbar-brand">House service</Link>
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -84,16 +99,24 @@ export class Nav extends Component {
             </ul>
           </div>
         </div>
+        <hr style={{ border: 'none', height: '3px', backgroundColor: 'grey' }}></hr>
       </nav>
 
     );
   }
   notAuthenticatedView() {
     return (
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <Link to="/" className="navbar-brand">Home</Link>
+      <nav className="navbar navbar-expand-md navbar-light bg-light border-bottom border-grey mb-5">
+        <div className="container-fluid">
+          <div className="navbar-brand">
+            <img
+              alt=""
+              src={logo}
+              width="30"
+              height="30"
+              className="d-inline-block mr-2"
+            />
+            <Link to="/" className="navbar-brand">House service</Link>
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">

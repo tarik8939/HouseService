@@ -3,19 +3,17 @@ import Ad from "../../components/Ad/Ad";
 
 function ListOfAdsComponent(props) {
   const RenderAds = () => {
-     
-      return (
-        <div className="row">
-          <div className="col-md-1"></div>
-          <div className="col-md-10">
-            {props.state.Ads.filter(ad => ad.name.toLowerCase().includes(props.state.title.toLowerCase())).map((item) => (
-              <Ad key={item.advertisementID} dataParent={item} load={props.load}/>
-            ))}
-          </div>
-        </div>
 
-      )
-    
+    return (
+      <div className="row">
+        <div className="col-md-1"></div>
+        <div className="col-md-10">
+          {props.state.Ads.filter(ad => ad.name.toLowerCase().includes(props.state.title.toLowerCase())).map((item) => (
+            <Ad key={item.advertisementID} dataParent={item} load={props.load} />
+          ))}
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -35,9 +33,8 @@ function ListOfAdsComponent(props) {
           <option value="Price">Price</option>
           <option value="Date">Date</option>
         </select>
-        <p className="col-md-3">{props.state.Ads.filter(ad => ad.name.toLowerCase().includes(props.state.title.toLowerCase())).length} searched results</p>
+        <p>{props.state.Ads.filter(ad => ad.name.toLowerCase().includes(props.state.title.toLowerCase())).length} searched results</p>
       </div>
-
       <div className="col-md-3"></div>
       {RenderAds()}
     </div>

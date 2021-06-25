@@ -11,16 +11,16 @@ function AdViewComponent(props) {
     if (props.state.Ad.statusID === 3) {
       return (
         <div>
-            <Rating
-              onClick={props.handleChange}
-              ratingValue={props.state.rating}
-              size={20}
-              label
-              transition
-              fillColor='orange'
-              emptyColor='gray'
-            />
-            <input type="button" value="Work Done" className="btn col-md-12 btn-primary text-center mt-2" onClick={(e) => props.workDone(props.state.Ad, e)}></input>
+          <Rating
+            onClick={props.handleChange}
+            ratingValue={props.state.rating}
+            size={20}
+            label
+            transition
+            fillColor='orange'
+            emptyColor='gray'
+          />
+          <input type="button" value="Work Done" className="btn col-md-12 btn-primary text-center mt-2" onClick={(e) => props.workDone(props.state.Ad, e)}></input>
         </div>
       )
     }
@@ -67,7 +67,10 @@ function AdViewComponent(props) {
         </div>
         <div className="col-lg-8">
           <div>
-            <h2>{props.state.Ad.name}</h2>
+            <div className="row">
+              <h2 className="col-lg-8">{props.state.Ad.name}</h2>
+              <span className="fs-3 col-lg-4 text-right">Price: <a className="text-success">{props.state.Ad.price}$</a></span>
+            </div>
             <hr style={{ border: 'none', height: '3px', backgroundColor: 'grey' }}></hr>
             <span>{props.state.Ad.description}</span>
           </div>
@@ -80,10 +83,9 @@ function AdViewComponent(props) {
             <span className="col-4">Address: {props.state.Ad.address}</span>
           </div>
           <div className="row justify-content-start mt-4">
-            <span className="col-md-5">Accomplish from: {moment(props.state.Ad.startDate).format('L')}  </span>
-            <span className="col-md-2">Until:{moment(props.state.Ad.endDate).format('L')}</span>
-            <span className="col-md-3"></span>
-            <span className=" col-md-2 text-success">{props.state.Ad.price}$</span>
+            <span className="col-5">Accomplish from: {moment(props.state.Ad.startDate).format('L')}  </span>
+            <span className="col-2">Until:{moment(props.state.Ad.endDate).format('L')}</span>
+            <span className="col-5"></span>
           </div>
           <div className="row mt-4">
             {ForHouseOwner()}

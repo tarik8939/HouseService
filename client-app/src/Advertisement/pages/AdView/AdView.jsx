@@ -12,9 +12,9 @@ export class AdView extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange = (rating) => {
-    this.setState({rating:rating});
+    this.setState({ rating: rating });
   }
-  componentWillMount(){
+  componentWillMount() {
     const id = this.props.match.params.id;
     var path = `https://localhost:44307/api/Advertisement/getById/${id}`;
     axios.get(path).then(response => {
@@ -23,22 +23,26 @@ export class AdView extends Component {
     });
   }
   workDone = (item) => {
+    if (this.state.rating === null) {
+      alert("please rate your contractor from 1-5");
+      window.location.reload();
+    }
     const path = `https://localhost:44307/api/Advertisement/changeRating/${item.advertisementID}/${this.state.rating}`;
     axios.put(path, {
-        headers: {
-            "Content-Type": "application/json",
-        },
+      headers: {
+        "Content-Type": "application/json",
+      },
     }).then(response => {
-        console.log(response)
-        window.location.reload();
+      console.log(response)
+      window.location.reload();
     }).catch((error) => {
-        console.log(error)
+      console.log(error)
     })
-}
+  }
   render() {
-    if(this.state.Ad){
-      return(<AdViewComponent user={this.props.user} workDone={this.workDone} state={this.state} handleChange={this.handleChange}></AdViewComponent>)
+    if (this.state.Ad) {
+      return (<AdViewComponent user={this.props.user} workDone={this.workDone} state={this.state} handleChange={this.handleChange}></AdViewComponent>)
     }
-    else return(<h1>Loading...</h1>)
+    else return (<h1>Loading...</h1>)
   }
 }
