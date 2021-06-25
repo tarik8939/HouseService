@@ -47,7 +47,6 @@ export class Register extends Component {
       console.log(response);
       if (response.userID) {
         console.log(response);
-        this.props.handleLogin(response);
         this.setState({ redirect: true });
         this.render();
       }
@@ -105,7 +104,7 @@ export class Register extends Component {
 
   render() {
     if (this.state.redirect)
-      return (<Redirect to="/" />);
+      return (<Redirect to="/login" />);
     else
       return (
         <div className="row">

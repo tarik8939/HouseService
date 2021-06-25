@@ -12,7 +12,7 @@ import { FormErrors } from '../../components/FormErrors';
 function EditAdComponent(props) {
   return (
     <div className="row">
-      <div className="col-md-3"></div>
+      <div className="col-md-4"></div>
       <div className="col-md-6">
         <form>
           <h2 className="text-center" style={{ width: '60%' }}>Edit ad</h2>
@@ -37,15 +37,6 @@ function EditAdComponent(props) {
               />
             </label>
           </div>
-          <div className="form-group">
-            <label className="col-md-8">
-              Address:
-              <input name="address" className="form-control"
-                type="text" value={props.state.address}
-                onChange={(e) => props.handleName(e)}
-              />
-            </label>
-          </div>
           <div className="form-group" >
             <label className="col-md-8">
               Date range:<br />
@@ -60,6 +51,15 @@ function EditAdComponent(props) {
                 } // PropTypes.func.isRequired,
                 focusedInput={props.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                 onFocusChange={(focusedInput) => props.setState({ focusedInput })} // PropTypes.func.isRequired,
+              />
+            </label>
+          </div>
+          <div className="form-group">
+            <label className="col-md-8">
+              Address:
+              <input name="address" className="form-control"
+                type="text" value={props.state.address}
+                onChange={(e) => props.handleName(e)}
               />
             </label>
           </div>

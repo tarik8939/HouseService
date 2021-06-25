@@ -14,7 +14,7 @@ function NewAdComponent(props) {
   return (
     <main>
       <div className="row">
-        <div className="col-md-3"></div>
+        <div className="col-md-4"></div>
         <div className="col-md-6 justify-content-center">
           <form onSubmit={props.Submit}>
             <h2 className="text-center" style={{ width: '60%' }}>Make a new ad</h2>
@@ -46,18 +46,6 @@ function NewAdComponent(props) {
                 />
               </label>
             </div>
-            <div className="form-group">
-              <label className="col-md-8">
-                Address:
-                <input
-                  className="form-control"
-                  type="text"
-                  name="Address"
-                  value={props.state.Address}
-                  onChange={props.handleInputChange}
-                />
-              </label>
-            </div>
             <div className="form-group" >
               <label className="col-md-8">
                 Date range:<br />
@@ -73,6 +61,18 @@ function NewAdComponent(props) {
                   } // PropTypes.func.isRequired,
                   focusedInput={props.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                   onFocusChange={(focusedInput) => props.setState({ focusedInput })} // PropTypes.func.isRequired,
+                />
+              </label>
+            </div>
+            <div className="form-group">
+              <label className="col-md-8">
+                Address:
+                <input
+                  className="form-control"
+                  type="text"
+                  name="Address"
+                  value={props.state.Address}
+                  onChange={props.handleInputChange}
                 />
               </label>
             </div>

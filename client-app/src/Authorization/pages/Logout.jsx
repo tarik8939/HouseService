@@ -25,7 +25,7 @@ export class Logout extends Component {
       });
   }
   render() {
-      return (<h1>You've logged out</h1>)
+      return (<h1 className="text-center">You've logged out</h1>)
   }
 }
 

@@ -12,17 +12,20 @@ export class Home extends Component {
 
   render() {
     return (
-      <div >
-        <h2>House Service is a place for upgrading your house or finding a well-paid job</h2>
-        <p className="lead">Types of work that available on our site:</p>
-        <ul>
+      <div className="row container">
+        <div className="col-2"></div>
+        <div className="col-7">
+        <h2 className="text-center">House Service is a place for upgrading your house or finding a well-paid job</h2>
+        <p className="fs-4 text-center">Types of work that available on our site:</p>
+        <ul className="">
           <li className="lead">Repairs</li>
           <li className="lead">Plumbing</li>
           <li className="lead">Renovation</li>
           <li className="lead">Construction works</li>
           <li className="lead">Yard care works</li>
         </ul>
-
+        </div>
+        <div className="col-3"></div>
       </div>
     );
   }
