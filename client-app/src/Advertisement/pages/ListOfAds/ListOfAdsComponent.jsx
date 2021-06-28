@@ -6,8 +6,8 @@ function ListOfAdsComponent(props) {
 
     return (
       <div className="row">
-        <div className="col-md-1"></div>
-        <div className="col-md-10">
+        <div className="col-md-1 col-xs-1 col-lg-1 col-sm-1 "></div>
+        <div className="col-md-10 col-xs-10 col-lg-10 col-sm-10 ">
           {props.state.Ads.filter(ad => ad.name.toLowerCase().includes(props.state.title.toLowerCase())).map((item) => (
             <Ad key={item.advertisementID} dataParent={item} load={props.load} />
           ))}
@@ -18,11 +18,11 @@ function ListOfAdsComponent(props) {
 
   return (
     <div className="row">
-      <div className="col-md-1"></div>
-      <div className="col-md-10">
+      <div className="col-md-1 "></div>
+      <div className="col-md-10 ">
         <label className=" mr-2">Search by title </label>
         <input type="text" name="title"
-          className="col-md-6 rounded ml-1 mr-2"
+          className="col-md-6  rounded ml-1 mr-2"
           value={props.state.title}
           onChange={(e) => props.HandleValueChange(e)}>
         </input>
@@ -35,7 +35,7 @@ function ListOfAdsComponent(props) {
         </select>
         <p>{props.state.Ads.filter(ad => ad.name.toLowerCase().includes(props.state.title.toLowerCase())).length} searched results</p>
       </div>
-      <div className="col-md-3"></div>
+      <div className="col-md-3 "></div>
       {RenderAds()}
     </div>
   );
