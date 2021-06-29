@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from "axios";
-import ReactStars from 'react-stars'
+import Rating from 'react-simple-star-rating'
 
 export default class ReqForAd extends Component {
 
@@ -32,38 +32,42 @@ export default class ReqForAd extends Component {
   render() {
     const { data } = this.state;
     const forAccepted = () => {
-      if(data.stateID === 3)
-      return(<div ><span className="text-success ml-3">Accepted</span></div>);
+      if (data.stateID === 3)
+        return (<div className="col-auto"><span className="text-success">Accepted</span></div>);
     }
     const forUnAccepted = () => {
-      if(data.stateID === 1)
-      return(
-      <div className="row col-md-12 m-1">
-        <button type="button" className="btn btn-success text-light col-md-2 mr-2" onClick={(e) => this.changeState(3, e)}>Accept</button>
-        <button type="button" className="btn btn-danger text-light col-md-2" onClick={(e) => this.changeState(2, e)}>Decline</button>
-      </div>);
+      if (data.stateID === 1)
+        return (
+          <div className="col-auto">
+            <button type="button" className="btn btn-success text-light" onClick={(e) => this.changeState(3, e)}>Accept</button>
+            <button type="button" className="btn btn-danger text-light ml-2" onClick={(e) => this.changeState(2, e)}>Decline</button>
+          </div>);
     }
-    const rating = () => data.user.markCount>0 
-    ? <p>Rating: {data.user.rating} ({data.user.markCount})</p> 
-    : null
+    const rating = () => data.user.markCount > 0
+      ? <p className="fs-5 text-right">Rating: {data.user.rating} ({data.user.markCount})</p>
+      : null
     return (
-      <div className="row">
-        <div className="border border-primary rounded m-1 ml-4">
-          <div className="row col-md-12">
-            <span className="col-md-4">
-              <p>Contractor: {data.user.fullName}</p>
-              {rating()}
-            </span>
-            <span className="col-md-4">
-              <p>Comment: {data.comment}</p>
-            </span>
-            <span className="col-md-2">
-              <p>{data.user.phoneNum}</p>
-            </span>
-            <span className="col-md-2">
-              <p>{data.user.email}</p>
-            </span>
+      <div className="border border-primary rounded m-1 container-fluid">
+        <div className="row mb-2 mt-2">
+          <div className="col-10">
+            <p className="fs-4">Contractor: <span className="text-primary">{data.user.fullName}</span></p>
           </div>
+          <div className="col-auto">
+            {rating()}
+          </div>
+        </div>
+        <div className="row mb-2">
+          <p className="col-11 fs-5">Comment: {data.comment}</p>
+        </div>
+        <div className="row mb-2">
+        <p className="col-auto fs-6">
+            Phone Number: {data.user.phoneNum}
+          </p>
+          <p className="col-auto fs-6">
+            Email: {data.user.email}
+          </p>
+        </div>
+        <div className="row mb-2">
           {forAccepted()}
           {forUnAccepted()}
         </div>

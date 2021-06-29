@@ -57,8 +57,8 @@ export default class NewRequest extends Component {
     if (this.state.request != null) {
       return (
         <div>
-          <h3>Your request status: {this.state.request.state.stateName}</h3>
-          <p>Your comment: {this.state.request.comment}</p>
+          <p className="fs-5">Your request status: {this.state.request.state.stateName}</p>
+          <p className="fs-5">Your comment: {this.state.request.comment}</p>
         </div>
 
       );

@@ -33,7 +33,7 @@ export default class Req extends Component {
   }
   render() {
     return (
-      <div className="row">
+      <div>
         <ReqComponent key={this.props.key}
         req={this.state.req}
         changeState={this.props.changeState}
