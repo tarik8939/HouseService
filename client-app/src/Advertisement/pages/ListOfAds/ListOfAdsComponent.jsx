@@ -16,16 +16,16 @@ function ListOfAdsComponent(props) {
   return (
     <div>
     <div className="row mb-3">
-        <p className="col-auto fs-4 text-right">Search</p>
+        <p className="col-auto fs-4 text-right">Find</p>
         <input type="search" name="title"
-          className="col-9  col-lg-10 col-xl-11"
+          className="col-10  col-lg-11"
           value={props.state.title}
           onChange={(e) => props.HandleValueChange(e)}>
         </input>
     </div>
     <div className="row mb-3">
-        <p className="col-auto fs-4 text-right">Sort by </p>
-        <select className="col-9  col-lg-10 col-xxl-11" onChange={(e) => props.onSort(e)}>
+        <p className="col-auto fs-4 text-right">Sort</p>
+        <select className="col-10  col-lg-11" onChange={(e) => props.onSort(e)}>
           <option value="Select parametr for sort" defaultValue >Select parametr for sort </option>
           <option value="Name">Name</option>
           <option value="Price">Price</option>
