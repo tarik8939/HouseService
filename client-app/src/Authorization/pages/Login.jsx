@@ -51,26 +51,26 @@ export class Login extends Component {
       return (<Redirect to="/" />);
     return (
       <div className="row">
-        <div className="col-md-3"></div>
-        <div className="col-md-6">
+        <div className="col-md-1 col-lg-3 "></div>
+        <div className="col-md-10 col-lg-6 ">
           <form className="form-signin" onSubmit={this.Submit}>
             <div className="text-center">
               <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
               <div className="form-group">
-                <label className="col-md-8">Email
+                <label className="col-md-8 col-lg-10">Email
                   <input type="email" className="form-control" placeholder="Email" name="Email"
                     onChange={this.handleInputChange} value={this.state.Email} required />
                 </label>
               </div>
               <div className="form-group">
-                <label className="col-md-8">Password
+                <label className="col-md-8 col-lg-10">Password
                   <input type="password" className="form-control" placeholder="Password" name="Password"
                     onChange={this.handleInputChange} value={this.state.Password} required />
                 </label>
               </div>
               <div className="form-group">
-                <label className="col-md-8">
-                  <button className="btn col-md-12 btn-primary text-center" type="submit">Sign in</button>
+                <label className="col-md-8 col-lg-10">
+                  <button className="btn col-md-12 col-lg-12 btn-primary text-center" type="submit">Sign in</button>
                 </label>
               </div>
             </div>

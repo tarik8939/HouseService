@@ -14,15 +14,15 @@ function NewAdComponent(props) {
   return (
     <main>
       <div className="row">
-        <div className="col-md-4"></div>
-        <div className="col-md-6 justify-content-center">
+        <div className=" col-md-1 col-lg-3"></div>
+        <div className="col-md-10 col-lg-6 justify-content-center">
           <form onSubmit={props.Submit}>
-            <h2 className="text-center" style={{ width: '60%' }}>Make a new ad</h2>
+            <h2 className="text-center">Make a new ad</h2>
             <div className="panel panel-default ml-3">
               <FormErrors formErrors={props.state.formErrors} />
             </div>
             <div className={`form-group ${props.errorClass(props.state.formErrors.Name)}`}>
-              <label className="col-md-8">
+              <label className=" col-md-8 col-lg-10">
                 Name:
                 <input
                   type="text"
@@ -34,7 +34,7 @@ function NewAdComponent(props) {
               </label>
             </div>
             <div className={`form-group ${props.errorClass(props.state.formErrors.Description)}`}>
-              <label className="col-md-8">
+              <label className="col-md-8 col-lg-10">
                 Description:
                 <textarea
                   rows="5"
@@ -47,11 +47,10 @@ function NewAdComponent(props) {
               </label>
             </div>
             <div className="form-group" >
-              <label className="col-md-8">
+              <label className="col-md-8 col-lg-10">
                 Date range:<br />
                 <DateRangePicker
-                  // className="col-md-12"
-                  className="customDatePickerWidth"
+                  className="customDatePickerWidth col-md-8 col-lg-10"
                   startDate={props.state.startDate} // momentPropTypes.momentObj or null,
                   startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
                   endDate={props.state.endDate} // momentPropTypes.momentObj or null,
@@ -65,7 +64,7 @@ function NewAdComponent(props) {
               </label>
             </div>
             <div className="form-group">
-              <label className="col-md-8">
+              <label className="col-md-8 col-lg-10">
                 Address:
                 <input
                   className="form-control"
@@ -77,7 +76,7 @@ function NewAdComponent(props) {
               </label>
             </div>
             <div className={`form-group ${props.errorClass(props.state.formErrors.Price)}`}>
-              <label className="col-md-8">
+              <label className="col-md-8 col-lg-10">
                 Price:
                 <input
                   className="form-control"
@@ -88,8 +87,8 @@ function NewAdComponent(props) {
                 />
               </label>
             </div>
-            <div className="form-group col-md-8">
-              <input type="submit" value="Send" className="btn col-md-12 btn-primary" disabled={!props.state.formValid} />
+            <div className="form-group col-md-8 col-lg-10">
+              <input type="submit" value="Send" className="btn col-md-12 col-lg-12  btn-primary" disabled={!props.state.formValid} />
             </div>
 
           </form>

@@ -108,8 +108,8 @@ export class Register extends Component {
     else
       return (
         <div className="row">
-          <div className="col-md-3"></div>
-          <div className="col-md-6">
+          <div className="col-md-1 col-lg-3"></div>
+          <div className="col-md-10 col-lg-6">
             <form onSubmit={this.Submit} >
               <div className="text-center">
                 <h1 className="h3 mb-3 font-weight-normal">Please Register</h1>
@@ -117,37 +117,37 @@ export class Register extends Component {
                   <FormErrors formErrors={this.state.formErrors} />
                 </div>
                 <div className="form-group">
-                  <label className="col-md-8">First name
+                  <label className="col-md-8 col-lg-10">First name
                     <input type="text" className="form-control" placeholder="First name"
                       onChange={this.handleInputChange} name="FirstName" value={this.state.FirstName} required />
                   </label>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-8">Last name
+                  <label className="col-md-8 col-lg-10">Last name
                     <input type="text" className="form-control" placeholder="Last name"
                       onChange={this.handleInputChange} name="LastName" value={this.state.LastName} required />
                   </label>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-8">Email address
+                  <label className="col-md-8 col-lg-10">Email address
                     <input type="email" className="form-control" placeholder="Email address" name="Email"
                       onChange={this.handleInputChange} value={this.state.Email} required />
                   </label>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-8">Phone number
+                  <label className="col-md-8 col-lg-10">Phone number
                     <input type="text" className="form-control" placeholder="Phone number" name="PhoneNumber"
                       onChange={this.handleInputChange} value={this.state.PhoneNumber} required />
                   </label>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-8">Password
+                  <label className="col-md-8 col-lg-10">Password
                     <input type="password" name="password" className="form-control" placeholder="Password"
                       onChange={this.handleInputChange} value={this.state.Password} required />
                   </label>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-8"> Role
+                  <label className="col-md-8 col-lg-10"> Role
                     <select name="userTypeID" className="form-control" placeholder="Choose a role"
                       onChange={this.handleInputChange} value={this.state.userTypeID} required>
                       <option value="1">House owner</option>
@@ -156,8 +156,8 @@ export class Register extends Component {
                   </label>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-8">
-                    <button className="btn col-md-12 btn-primary text-center" type="submit">Register</button>
+                  <label className="col-md-8 col-lg-10">
+                    <button className="btn col-md-12 col-lg-12 btn-primary text-center" type="submit">Register</button>
                   </label>
                 </div>
               </div>
