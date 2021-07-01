@@ -3,11 +3,11 @@ import './App.css';
 import { Container } from 'reactstrap';
 import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
-import { Home } from './components/Home';
-import { Layout } from './components/Layout';
-import { Login } from "./Authorization/pages/Login";
+import { Home } from './Layout/Home';
+import { Layout } from './Layout/Layout';
+import { Login } from "./Authorization/Login";
 import { Register } from "./Authorization/pages/Register";
-import { Logout } from './Authorization/pages/Logout';
+import { Logout } from './Authorization/Logout';
 import { NewAd } from "./Advertisement/pages/NewAd/NewAd"
 import { ListOfAds } from './Advertisement/pages/ListOfAds/ListOfAds';
 import { EditAd } from './Advertisement/pages/EditAd/EditAd';
