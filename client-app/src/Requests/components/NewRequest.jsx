@@ -69,13 +69,13 @@ export default class NewRequest extends Component {
           <form onSubmit={this.Submit}>
             <h2 className="text-center" style={{ width: '95%' }}>Send request</h2>
 
-            <p className="row col-md-4 col-lg-4 " style={{ display: 'inline-block'}}>Message for house owner:</p>
+            <p className="col-auto" style={{ display: 'inline-block'}}>Message:</p>
 
 
             <input
               style={{ display: 'inline-block'}}
               type="text"
-              required className="form-control mb-3 col-md-8 col-lg-8 "
+              required className="form-control mb-3 col-md-11 col-lg-11"
               name="comment"
               value={this.state.comment}
               onChange={this.handleInputChange}

@@ -6,7 +6,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { Home } from './Layout/Home';
 import { Layout } from './Layout/Layout';
 import { Login } from "./Authorization/Login";
-import { Register } from "./Authorization/pages/Register";
+import { Register } from "./Authorization/Register";
 import { Logout } from './Authorization/Logout';
 import { NewAd } from "./Advertisement/pages/NewAd/NewAd"
 import { ListOfAds } from './Advertisement/pages/ListOfAds/ListOfAds';

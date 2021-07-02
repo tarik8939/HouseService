@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import { Redirect } from 'react-router-dom';
-import { FormErrors } from '../../Advertisement/components/FormErrors';
+import { FormErrors } from '../Advertisement/components/FormErrors';
 export class Register extends Component {
   constructor(props) {
     super(props);
